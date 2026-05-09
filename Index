@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Budget OS</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f5f3;
+    --white: #ffffff;
+    --border: #e0e0e0;
+    --text: #1a1a1a;
+    --muted: #999999;
+    --red: #d63c2f;
+    --green: #2a7a2a;
+    --mono: 'Space Mono', monospace;
+  }
+
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+background: var(–bg);
+color: var(–text);
+font-family: var(–mono);
+min-height: 100vh;
+padding: 0 0 80px;
+}
+
+/* Header */
+.site-header {
+background: var(–white);
+border-bottom: 1px solid var(–border);
+padding: 20px 24px;
+text-align: center;
+}
+
+.site-title {
+font-size: 18px;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+}
+
+.site-nav {
+margin-top: 6px;
+font-size: 11px;
+letter-spacing: 0.15em;
+color: var(–muted);
+text-transform: uppercase;
+display: flex;
+justify-content: center;
+gap: 20px;
+}
+
+.site-nav span { color: var(–text); }
+.site-nav a { color: var(–red); text-decoration: none; }
+
+/* Main content */
+.main { max-width: 600px; margin: 0 auto; padding: 24px 16px; }
+
+/* Cards */
+.card {
+background: var(–white);
+border: 1px solid var(–border);
+border-radius: 8px;
+padding: 20px;
+margin-bottom: 16px;
+}
+
+.card-title {
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+margin-bottom: 16px;
+padding-bottom: 12px;
+border-bottom: 1px solid var(–border);
+}
+
+/* Field groups */
+.field {
+margin-bottom: 14px;
+}
+
+.field label {
+display: block;
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 6px;
+}
+
+.field input {
+width: 100%;
+background: var(–bg);
+border: 1px solid var(–border);
+border-radius: 4px;
+color: var(–text);
+font-family: var(–mono);
+font-size: 14px;
+padding: 10px 12px;
+outline: none;
+transition: border-color 0.2s;
+}
+
+.field input:focus { border-color: var(–text); }
+
+.field-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+}
+
+/* Computed display */
+.computed-row {
+background: var(–bg);
+border: 1px solid var(–border);
+border-radius: 4px;
+padding: 10px 12px;
+font-size: 12px;
+color: var(–muted);
+margin-top: -8px;
+margin-bottom: 14px;
+}
+
+.computed-row span { color: var(–text); font-weight: 700; }
+
+/* Bills list */
+.bill-item {
+border-bottom: 1px solid var(–border);
+padding: 12px 0;
+display: grid;
+grid-template-columns: 1fr auto auto auto;
+gap: 8px;
+align-items: center;
+}
+
+.bill-item:last-child { border-bottom: none; }
+
+.bill-name {
+background: transparent;
+border: none;
+font-family: var(–mono);
+font-size: 13px;
+font-weight: 700;
+color: var(–text);
+outline: none;
+width: 100%;
+text-transform: uppercase;
+letter-spacing: 0.05em;
+}
+
+.bill-name::placeholder { color: var(–muted); font-weight: 400; }
+
+.bill-amt-wrap {
+display: flex;
+align-items: center;
+gap: 2px;
+background: var(–bg);
+border: 1px solid var(–border);
+border-radius: 4px;
+padding: 6px 8px;
+}
+
+.bill-amt-wrap span { font-size: 11px; color: var(–muted); }
+
+.bill-amt {
+background: transparent;
+border: none;
+font-family: var(–mono);
+font-size: 13px;
+color: var(–text);
+outline: none;
+width: 75px;
+text-align: right;
+}
+
+.bill-pct {
+font-size: 11px;
+font-weight: 700;
+min-width: 44px;
+text-align: right;
+color: var(–muted);
+}
+
+.bill-pct.high { color: var(–red); }
+
+.bill-bar {
+grid-column: 1 / -1;
+height: 2px;
+background: var(–border);
+border-radius: 1px;
+margin-top: 4px;
+}
+
+.bill-bar-fill {
+height: 100%;
+background: var(–text);
+border-radius: 1px;
+transition: width 0.4s ease;
+}
+
+.bill-bar-fill.high { background: var(–red); }
+
+.btn-del {
+background: none;
+border: none;
+font-family: var(–mono);
+font-size: 18px;
+color: var(–muted);
+cursor: pointer;
+padding: 0 2px;
+transition: color 0.2s;
+line-height: 1;
+}
+
+.btn-del:hover { color: var(–red); }
+
+/* Add bill */
+.btn-add {
+width: 100%;
+background: transparent;
+border: 1px dashed var(–border);
+border-radius: 4px;
+font-family: var(–mono);
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(–muted);
+padding: 10px;
+cursor: pointer;
+transition: all 0.2s;
+margin-top: 12px;
+}
+
+.btn-add:hover { border-color: var(–text); color: var(–text); }
+
+/* Price display */
+.price-section {
+background: var(–white);
+border: 1px solid var(–border);
+border-radius: 8px;
+padding: 20px;
+margin-bottom: 16px;
+}
+
+.price-label {
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 4px;
+}
+
+.price-big {
+font-size: 42px;
+font-weight: 700;
+letter-spacing: -0.02em;
+line-height: 1;
+margin-bottom: 2px;
+}
+
+.price-sub {
+font-size: 13px;
+color: var(–muted);
+margin-bottom: 16px;
+}
+
+.price-divider { height: 1px; background: var(–border); margin: 16px 0; }
+
+.price-row {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 8px 0;
+border-bottom: 1px solid var(–border);
+font-size: 12px;
+}
+
+.price-row:last-child { border-bottom: none; }
+
+.price-row-label {
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(–muted);
+font-size: 10px;
+}
+
+.price-row-val { font-weight: 700; font-size: 14px; }
+
+/* Visual bar */
+.income-bar-wrap {
+margin: 16px 0 8px;
+}
+
+.income-bar {
+height: 20px;
+border-radius: 3px;
+overflow: hidden;
+display: flex;
+background: var(–border);
+margin-bottom: 10px;
+}
+
+.ib-bills { background: var(–red); }
+.ib-allow { background: #555; }
+.ib-save { background: var(–green); }
+.ib-rem { background: var(–border); }
+
+.bar-legend {
+display: flex;
+flex-direction: column;
+gap: 6px;
+}
+
+.bar-leg-row {
+display: flex;
+align-items: center;
+gap: 8px;
+font-size: 11px;
+}
+
+.bl-dot { width: 8px; height: 8px; border-radius: 1px; flex-shrink: 0; }
+.bl-name { flex: 1; text-transform: uppercase; letter-spacing: 0.08em; color: var(–muted); }
+.bl-amt { font-weight: 700; }
+.bl-pct { color: var(–muted); min-width: 36px; text-align: right; }
+
+/* Note box */
+.note-box {
+background: #fff9e6;
+border: 1px solid #f0d060;
+border-radius: 4px;
+padding: 12px 14px;
+font-size: 11px;
+line-height: 1.6;
+color: #7a6000;
+margin-top: 8px;
+}
+
+.note-box strong { color: var(–red); }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+</style>
+
+</head>
+<body>
+
+<div class="site-header">
+  <div class="site-title">Budget OS</div>
+  <div class="site-nav">
+    <span>Dashboard</span>
+    <a href="#">May 2026 →</a>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- INCOME -->
+
+  <div class="card">
+    <div class="card-title">Input Income</div>
+
+```
+<div class="field-row">
+  <div class="field">
+    <label>Weekly Paycheck</label>
+    <input type="number" id="weekly" value="2097.44" oninput="recalc()">
+  </div>
+  <div class="field">
+    <label>Other Monthly</label>
+    <input type="number" id="other" value="0" placeholder="0.00" oninput="recalc()">
+  </div>
+</div>
+<div class="computed-row">
+  Monthly payroll: <span id="payroll-monthly">$0</span> &nbsp;·&nbsp; Annual: <span id="payroll-annual">$0</span>
+</div>
+```
+
+  </div>
+
+  <!-- ALLOWANCES -->
+
+  <div class="card">
+    <div class="card-title">Allowances (Weekly)</div>
+
+```
+<div class="field-row">
+  <div class="field">
+    <label>Cody / Week</label>
+    <input type="number" id="allow-cody" value="350" oninput="recalc()">
+  </div>
+  <div class="field">
+    <label>Katie / Week</label>
+    <input type="number" id="allow-katie" value="300" oninput="recalc()">
+  </div>
+</div>
+<div class="field" style="max-width:50%">
+  <label>Kid / Week</label>
+  <input type="number" id="allow-kid" value="50" oninput="recalc()">
+</div>
+<div class="computed-row">
+  Total allowances/month: <span id="allow-total-monthly">$0</span> &nbsp;·&nbsp; <span id="allow-pct">0%</span> of income
+</div>
+```
+
+  </div>
+
+  <!-- BILLS -->
+
+  <div class="card">
+    <div class="card-title">Monthly Bills</div>
+    <div id="bills-list"></div>
+    <button class="btn-add" onclick="addBill()">+ Add Bill</button>
+  </div>
+
+  <!-- PRICE DISPLAY -->
+
+  <div class="price-section">
+    <div class="price-label">Monthly Savings</div>
+    <div class="price-big" id="savings-big">$0</div>
+    <div class="price-sub" id="savings-sub">available to save each month</div>
+
+```
+<div id="note-box-wrap"></div>
+
+<div class="price-divider"></div>
+
+<div class="income-bar-wrap">
+  <div class="income-bar">
+    <div class="ib-bills" id="bar-bills" style="width:0%;transition:width 0.5s ease"></div>
+    <div class="ib-allow" id="bar-allow" style="width:0%;transition:width 0.5s ease"></div>
+    <div class="ib-save" id="bar-save" style="width:0%;transition:width 0.5s ease"></div>
+  </div>
+  <div class="bar-legend">
+    <div class="bar-leg-row">
+      <div class="bl-dot" style="background:var(--red)"></div>
+      <span class="bl-name">Bills</span>
+      <span class="bl-amt" id="leg-bills">$0</span>
+      <span class="bl-pct" id="legpct-bills">0%</span>
+    </div>
+    <div class="bar-leg-row">
+      <div class="bl-dot" style="background:#555"></div>
+      <span class="bl-name">Allowances</span>
+      <span class="bl-amt" id="leg-allow">$0</span>
+      <span class="bl-pct" id="legpct-allow">0%</span>
+    </div>
+    <div class="bar-leg-row">
+      <div class="bl-dot" style="background:var(--green)"></div>
+      <span class="bl-name">Savings</span>
+      <span class="bl-amt" id="leg-save">$0</span>
+      <span class="bl-pct" id="legpct-save">0%</span>
+    </div>
+  </div>
+</div>
+
+<div class="price-divider"></div>
+
+<div class="price-label" style="margin-bottom:12px">Summary</div>
+
+<div class="price-row">
+  <span class="price-row-label">Total Monthly Income</span>
+  <span class="price-row-val" id="sum-income">$0</span>
+</div>
+<div class="price-row">
+  <span class="price-row-label">Total Bills</span>
+  <span class="price-row-val" id="sum-bills" style="color:var(--red)">$0</span>
+</div>
+<div class="price-row">
+  <span class="price-row-label">Total Allowances</span>
+  <span class="price-row-val" id="sum-allow">$0</span>
+</div>
+<div class="price-row">
+  <span class="price-row-label">Weekly Bills Transfer Needed</span>
+  <span class="price-row-val" id="sum-weekly">$0</span>
+</div>
+<div class="price-row">
+  <span class="price-row-label">Monthly to Ally</span>
+  <span class="price-row-val" id="sum-ally" style="color:var(--green)">$0</span>
+</div>
+```
+
+  </div>
+
+</div>
+
+<script>
+const defaultBills = [
+  { name: 'MORTGAGE', amt: 2104.84 },
+  { name: 'LIBERTY MUTUAL', amt: 457.21 },
+  { name: 'CSU UTILITIES', amt: 259.00 },
+  { name: 'RAV4 PAYMENT', amt: 303.08 },
+  { name: 'T-MOBILE', amt: 175.25 },
+  { name: 'METRONET', amt: 72.90 },
+  { name: 'QUICK QUACK', amt: 61.99 },
+  { name: 'YOUTUBE PREMIUM', amt: 25.08 },
+  { name: 'HBO/HULU/DISNEY', amt: 34.69 },
+  { name: 'KATIE GAS', amt: 100.00 },
+];
+
+let bills = [...defaultBills];
+
+function fmt(n) {
+  const neg = n < 0;
+  return (neg ? '-$' : '$') + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function getMonthly() {
+  const w = parseFloat(document.getElementById('weekly').value) || 0;
+  const o = parseFloat(document.getElementById('other').value) || 0;
+  return (w * 4) + o;
+}
+
+function getAllow() {
+  const c = (parseFloat(document.getElementById('allow-cody').value) || 0) * 4;
+  const k = (parseFloat(document.getElementById('allow-katie').value) || 0) * 4;
+  const d = (parseFloat(document.getElementById('allow-kid').value) || 0) * 4;
+  return c + k + d;
+}
+
+function getBills() {
+  return bills.reduce((s, b) => s + (parseFloat(b.amt) || 0), 0);
+}
+
+function renderBills() {
+  const monthly = getMonthly();
+  const container = document.getElementById('bills-list');
+  container.innerHTML = '';
+  bills.forEach((bill, i) => {
+    const pct = monthly > 0 ? (bill.amt / monthly) * 100 : 0;
+    const isHigh = pct >= 15;
+    const div = document.createElement('div');
+    div.className = 'bill-item';
+    div.innerHTML = `
+      <input class="bill-name" type="text" value="${bill.name}" placeholder="BILL NAME"
+        onchange="bills[${i}].name=this.value">
+      <div class="bill-amt-wrap">
+        <span>$</span>
+        <input class="bill-amt" type="number" value="${bill.amt}"
+          oninput="bills[${i}].amt=parseFloat(this.value)||0;recalc()">
+      </div>
+      <span class="bill-pct ${isHigh ? 'high' : ''}">${pct.toFixed(1)}%</span>
+      <button class="btn-del" onclick="removeBill(${i})">×</button>
+      <div class="bill-bar">
+        <div class="bill-bar-fill ${isHigh ? 'high' : ''}" style="width:${Math.min(100, pct * 4)}%"></div>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function addBill() {
+  bills.push({ name: '', amt: 0 });
+  renderBills();
+  recalc();
+  setTimeout(() => {
+    const inputs = document.querySelectorAll('.bill-name');
+    inputs[inputs.length - 1].focus();
+  }, 0);
+}
+
+function removeBill(i) {
+  bills.splice(i, 1);
+  renderBills();
+  recalc();
+}
+
+function recalc() {
+  const monthly = getMonthly();
+  const annual = monthly * 12;
+  const allow = getAllow();
+  const totalBills = getBills();
+  const savings = monthly - totalBills - allow;
+  const weeklyBills = totalBills / 4;
+
+  const pBills = monthly > 0 ? (totalBills / monthly) * 100 : 0;
+  const pAllow = monthly > 0 ? (allow / monthly) * 100 : 0;
+  const pSave = monthly > 0 ? Math.max(0, (savings / monthly) * 100) : 0;
+
+  document.getElementById('payroll-monthly').textContent = fmt((parseFloat(document.getElementById('weekly').value)||0)*4);
+  document.getElementById('payroll-annual').textContent = fmt(monthly * 12);
+  document.getElementById('allow-total-monthly').textContent = fmt(allow);
+  document.getElementById('allow-pct').textContent = pAllow.toFixed(1) + '%';
+
+  // Big savings display
+  document.getElementById('savings-big').textContent = fmt(savings);
+  document.getElementById('savings-big').style.color = savings >= 0 ? 'var(--text)' : 'var(--red)';
+  document.getElementById('savings-sub').textContent = savings >= 0 ? 'available to save each month' : 'over budget — reduce bills or allowances';
+
+  // Note box
+  const noteWrap = document.getElementById('note-box-wrap');
+  if (savings > 0) {
+    noteWrap.innerHTML = `<div class="note-box">Add <strong>${Math.ceil((14000 - 10055) / savings * savings / savings)}</strong> months at this rate to hit your <strong>$14,000</strong> Ally goal — around <strong>${getGoalMonth(savings)}</strong>.</div>`;
+  } else {
+    noteWrap.innerHTML = '';
+  }
+
+  // Bars
+  document.getElementById('bar-bills').style.width = Math.min(100, pBills) + '%';
+  document.getElementById('bar-allow').style.width = Math.min(100 - Math.min(100,pBills), pAllow) + '%';
+  document.getElementById('bar-save').style.width = Math.min(100 - Math.min(100,pBills) - Math.min(100-Math.min(100,pBills),pAllow), pSave) + '%';
+
+  document.getElementById('leg-bills').textContent = fmt(totalBills);
+  document.getElementById('legpct-bills').textContent = pBills.toFixed(1) + '%';
+  document.getElementById('leg-allow').textContent = fmt(allow);
+  document.getElementById('legpct-allow').textContent = pAllow.toFixed(1) + '%';
+  document.getElementById('leg-save').textContent = fmt(Math.max(0, savings));
+  document.getElementById('legpct-save').textContent = pSave.toFixed(1) + '%';
+
+  document.getElementById('sum-income').textContent = fmt(monthly);
+  document.getElementById('sum-bills').textContent = fmt(totalBills);
+  document.getElementById('sum-allow').textContent = fmt(allow);
+  document.getElementById('sum-weekly').textContent = fmt(weeklyBills);
+  document.getElementById('sum-ally').textContent = fmt(Math.max(0, savings));
+
+  renderBills();
+}
+
+function getGoalMonth(monthlySavings) {
+  const current = 10055;
+  const goal = 14000;
+  const needed = goal - current;
+  if (monthlySavings <= 0) return 'unknown';
+  const months = Math.ceil(needed / monthlySavings);
+  const d = new Date(2026, 4, 1); // May 2026
+  d.setMonth(d.getMonth() + months);
+  return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+}
+
+renderBills();
+recalc();
+</script>
+
+</body>
+</html>
