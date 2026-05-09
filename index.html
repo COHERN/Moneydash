@@ -289,8 +289,8 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 
 .bill-item {
   display: grid;
-  grid-template-columns: 1fr auto auto auto;
-  grid-template-rows: auto 2px;
+  grid-template-columns: 1fr auto auto auto auto;
+  grid-template-rows: auto 3px;
   gap: 8px;
   align-items: center;
   padding: 11px 0;
@@ -348,18 +348,65 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
   letter-spacing: 0.05em;
 }
 
-.bill-pct.high { color: var(--red); }
 
-.bill-bar { grid-column: 1 / -1; height: 2px; background: var(--border); border-radius: 1px; }
+
+.tag-btn {
+  font-family: var(--mono);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 20px;
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  background: var(--bg);
+  color: var(--muted);
+}
+
+.tag-btn.need { background: #e8f0fb; border-color: #a8c0ee; color: #2450a0; }
+.tag-btn.want { background: #fef3e2; border-color: #f0c878; color: #8a5000; }
+
+.bills-tally {
+  display: flex;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.tally-cell {
+  flex: 1;
+  padding: 10px 20px;
+  border-right: 1px solid var(--border);
+}
+
+.tally-cell:last-child { border-right: none; }
+
+.tally-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.tally-val { font-size: 13px; font-weight: 700; }
+.tally-val.need { color: #2450a0; }
+.tally-val.want { color: #8a5000; }
+
+.bill-bar { grid-column: 1 / -1; height: 3px; background: var(--border); border-radius: 1px; }
 
 .bill-bar-fill {
   height: 100%;
   background: var(--muted-light);
   border-radius: 1px;
-  transition: width 0.4s ease;
+  transition: width 0.4s ease, background 0.2s ease;
 }
 
-.bill-bar-fill.high { background: var(--red); }
+.bill-bar-fill.need { background: #5b8ee8; }
+.bill-bar-fill.want { background: #c87c1a; }
 
 .btn-del {
   background: none;
@@ -573,6 +620,16 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
       <span class="card-title">Monthly Bills</span>
     </div>
     <div class="bills-list" id="bills-list"></div>
+    <div class="bills-tally">
+      <div class="tally-cell">
+        <div class="tally-label">Needs</div>
+        <div class="tally-val need" id="tally-needs">$0</div>
+      </div>
+      <div class="tally-cell">
+        <div class="tally-label">Wants</div>
+        <div class="tally-val want" id="tally-wants">$0</div>
+      </div>
+    </div>
     <div class="bills-footer">
       <button class="btn-add" onclick="addBill()">+ Add Bill</button>
     </div>
@@ -582,16 +639,16 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 
 <script>
 const defaultBills = [
-  { name: 'MORTGAGE',        amt: 2104.84 },
-  { name: 'LIBERTY MUTUAL',  amt: 457.21  },
-  { name: 'CSU UTILITIES',   amt: 259.00  },
-  { name: 'RAV4 PAYMENT',    amt: 303.08  },
-  { name: 'T-MOBILE',        amt: 175.25  },
-  { name: 'METRONET',        amt: 72.90   },
-  { name: 'QUICK QUACK',     amt: 61.99   },
-  { name: 'YOUTUBE PREMIUM', amt: 25.08   },
-  { name: 'HBO/HULU/DISNEY', amt: 34.69   },
-  { name: 'KATIE GAS',       amt: 100.00  },
+  { name: 'MORTGAGE',        amt: 2104.84, tag: 'need' },
+  { name: 'LIBERTY MUTUAL',  amt: 457.21,  tag: 'need' },
+  { name: 'CSU UTILITIES',   amt: 259.00,  tag: 'need' },
+  { name: 'RAV4 PAYMENT',    amt: 303.08,  tag: 'need' },
+  { name: 'T-MOBILE',        amt: 175.25,  tag: 'need' },
+  { name: 'METRONET',        amt: 72.90,   tag: 'need' },
+  { name: 'QUICK QUACK',     amt: 61.99,   tag: 'want' },
+  { name: 'YOUTUBE PREMIUM', amt: 25.08,   tag: 'want' },
+  { name: 'HBO/HULU/DISNEY', amt: 34.69,   tag: 'want' },
+  { name: 'KATIE GAS',       amt: 100.00,  tag: 'need' },
 ];
 
 let bills  = defaultBills.map(b => ({ ...b }));
@@ -650,14 +707,28 @@ function getBills() {
 }
 
 /* ── Bill list ── */
+function cycleTag(i) {
+  const t = bills[i].tag;
+  bills[i].tag = t === 'none' ? 'need' : t === 'need' ? 'want' : 'none';
+  renderBills();
+}
+
 function renderBills() {
   const monthly   = getMonthly();
   const container = document.getElementById('bills-list');
   container.innerHTML = '';
+  let needTotal = 0, wantTotal = 0, untagTotal = 0;
+
   bills.forEach((bill, i) => {
     const pct    = monthly > 0 ? (bill.amt / monthly) * 100 : 0;
-    const isHigh = pct >= 15;
-    const div    = document.createElement('div');
+    const tag    = bill.tag || 'none';
+    const barClass = tag !== 'none' ? tag : '';
+    const tagLabel = tag === 'need' ? 'Need' : tag === 'want' ? 'Want' : '—';
+
+    if (tag === 'need') needTotal  += bill.amt;
+    else if (tag === 'want') wantTotal += bill.amt;
+
+    const div = document.createElement('div');
     div.className = 'bill-item';
     div.innerHTML = `
       <input class="bill-name" type="text" value="${bill.name}" placeholder="BILL NAME"
@@ -667,18 +738,22 @@ function renderBills() {
         <input class="bill-amt" type="number" value="${bill.amt}"
           oninput="bills[${i}].amt = parseFloat(this.value) || 0; recalc()">
       </div>
-      <span class="bill-pct${isHigh ? ' high' : ''}">${pct.toFixed(1)}%</span>
+      <span class="bill-pct">${pct.toFixed(1)}%</span>
+      <button class="tag-btn ${tag !== 'none' ? tag : ''}" onclick="cycleTag(${i})">${tagLabel}</button>
       <button class="btn-del" onclick="removeBill(${i})" title="Remove">×</button>
       <div class="bill-bar">
-        <div class="bill-bar-fill${isHigh ? ' high' : ''}" style="width:${Math.min(100, pct * 4)}%"></div>
+        <div class="bill-bar-fill ${barClass}" style="width:${Math.min(100, pct * 4)}%"></div>
       </div>
     `;
     container.appendChild(div);
   });
+
+  document.getElementById('tally-needs').textContent = fmt(needTotal);
+  document.getElementById('tally-wants').textContent = fmt(wantTotal);
 }
 
 function addBill() {
-  bills.push({ name: '', amt: 0 });
+  bills.push({ name: '', amt: 0, tag: 'none' });
   renderBills();
   recalc();
   setTimeout(() => {
