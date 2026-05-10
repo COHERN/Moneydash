@@ -20,7 +20,7 @@ padding-bottom: 80px;
 .site-header {
 background: #ffffff;
 border-bottom: 1px solid #e2e2de;
-padding: 14px 20px;
+padding: 14px 18px;
 display: flex;
 align-items: center;
 justify-content: space-between;
@@ -32,83 +32,69 @@ font-size: 13px;
 font-weight: 700;
 letter-spacing: 0.2em;
 text-transform: uppercase;
-flex-shrink: 0;
 }
 
 .header-right { display: flex; align-items: center; gap: 8px; }
 
-.btn-reset {
+.btn-header {
 font-family: ‘Space Mono’, monospace;
 font-size: 9px;
 font-weight: 700;
 letter-spacing: 0.1em;
 text-transform: uppercase;
-color: #c93b2e;
-background: #fff0ee;
-border: 1px solid #f0c0ba;
 border-radius: 20px;
 padding: 5px 12px;
 cursor: pointer;
+border: none;
 }
 
-.btn-pdf {
-font-family: ‘Space Mono’, monospace;
-font-size: 9px;
-font-weight: 700;
-letter-spacing: 0.1em;
-text-transform: uppercase;
-color: #ffffff;
-background: #1a1a1a;
-border: none;
-border-radius: 20px;
-padding: 5px 12px;
-cursor: pointer;
-}
+.btn-new-month { color: #c93b2e; background: #fff0ee; border: 1px solid #f0c0ba; }
+.btn-pdf { color: #ffffff; background: #1a1a1a; }
 
 .main {
 max-width: 580px;
 margin: 0 auto;
-padding: 20px 16px;
+padding: 18px 14px;
 display: flex;
 flex-direction: column;
 gap: 12px;
 }
 
-/* ── BALANCE HERO ── */
-.balance-hero {
+/* BALANCE HERO */
+.hero {
 background: #1a1a1a;
 border-radius: 12px;
-padding: 24px 20px 20px;
+padding: 22px 18px 18px;
 color: #ffffff;
 }
 
-.balance-period {
+.hero-label {
 font-size: 9px;
 font-weight: 700;
 letter-spacing: 0.2em;
 text-transform: uppercase;
-color: #8a8a86;
-margin-bottom: 6px;
+color: #666660;
+margin-bottom: 4px;
 }
 
-.balance-amount {
-font-size: 48px;
+.hero-amount {
+font-size: 44px;
 font-weight: 700;
 letter-spacing: -0.03em;
 line-height: 1;
 margin-bottom: 4px;
 }
 
-.balance-amount.positive { color: #7bbf90; }
-.balance-amount.negative { color: #f08070; }
+.hero-amount.pos { color: #7bbf90; }
+.hero-amount.neg { color: #f08070; }
 
-.balance-sub {
-font-size: 11px;
-color: #8a8a86;
-margin-bottom: 20px;
+.hero-sub {
+font-size: 10px;
+color: #666660;
+margin-bottom: 18px;
 }
 
-.balance-grid {
+.hero-grid {
 display: grid;
 grid-template-columns: 1fr 1fr 1fr;
 gap: 1px;
@@ -117,30 +103,14 @@ border-radius: 8px;
 overflow: hidden;
 }
 
-.balance-cell {
-background: #242424;
-padding: 12px 14px;
-}
+.hero-cell { background: #242424; padding: 10px 12px; }
+.hero-cell-label { font-size: 8px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #666660; margin-bottom: 3px; }
+.hero-cell-val { font-size: 13px; font-weight: 700; }
+.hero-cell-val.green { color: #7bbf90; }
+.hero-cell-val.red   { color: #f08070; }
+.hero-cell-val.gold  { color: #c8a84c; }
 
-.balance-cell-label {
-font-size: 8px;
-font-weight: 700;
-letter-spacing: 0.15em;
-text-transform: uppercase;
-color: #8a8a86;
-margin-bottom: 4px;
-}
-
-.balance-cell-val {
-font-size: 14px;
-font-weight: 700;
-}
-
-.balance-cell-val.green { color: #7bbf90; }
-.balance-cell-val.red   { color: #f08070; }
-.balance-cell-val.gold  { color: #c8a84c; }
-
-/* ── CARD ── */
+/* CARD */
 .card {
 background: #ffffff;
 border: 1px solid #e2e2de;
@@ -149,11 +119,12 @@ overflow: hidden;
 }
 
 .card-header {
-padding: 12px 18px;
+padding: 11px 16px;
 border-bottom: 1px solid #e2e2de;
 display: flex;
 align-items: center;
 justify-content: space-between;
+gap: 8px;
 }
 
 .card-title {
@@ -164,169 +135,195 @@ text-transform: uppercase;
 color: #8a8a86;
 }
 
-/* ── DEPOSITS ── */
-.deposit-list { padding: 0 18px; }
+.card-badge {
+font-size: 10px;
+font-weight: 700;
+color: #267a2a;
+}
+
+/* DEPOSITS */
+.deposit-list { padding: 0 16px; }
+
+.deposit-empty {
+padding: 14px 0;
+font-size: 11px;
+color: #8a8a86;
+text-align: center;
+}
 
 .deposit-item {
 display: flex;
 align-items: center;
-gap: 10px;
-padding: 10px 0;
+gap: 8px;
+padding: 9px 0;
 border-bottom: 1px solid #f0f0ee;
 }
 
 .deposit-item:last-child { border-bottom: none; }
 
-.deposit-label {
-flex: 1;
-font-size: 12px;
-font-weight: 700;
-text-transform: uppercase;
-letter-spacing: 0.05em;
-}
-
-.deposit-date {
-font-size: 10px;
-color: #8a8a86;
-min-width: 60px;
-text-align: right;
-}
-
-.deposit-amount {
-font-size: 13px;
-font-weight: 700;
-color: #267a2a;
-min-width: 80px;
-text-align: right;
-}
-
-.deposit-del {
-background: none;
-border: none;
-font-size: 15px;
-color: #c8c8c2;
-cursor: pointer;
-padding: 0 2px;
-line-height: 1;
-}
-
+.deposit-info { flex: 1; min-width: 0; }
+.deposit-name { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.deposit-date { font-size: 9px; color: #8a8a86; margin-top: 1px; }
+.deposit-amt { font-size: 13px; font-weight: 700; color: #267a2a; white-space: nowrap; }
+.deposit-del { background: none; border: none; font-size: 14px; color: #c8c8c2; cursor: pointer; padding: 0 2px; line-height: 1; flex-shrink: 0; }
 .deposit-del:hover { color: #c93b2e; }
 
-.deposit-add-row {
+.collapse-btn {
+background: none;
+border: none;
+font-family: ‘Space Mono’, monospace;
+font-size: 8px;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: #8a8a86;
+cursor: pointer;
+padding: 0;
+}
+
+.dep-add-row {
 display: flex;
-gap: 8px;
-padding: 12px 18px;
+gap: 6px;
+padding: 10px 16px;
 border-top: 1px solid #e2e2de;
 align-items: center;
-flex-wrap: wrap;
 }
 
-.deposit-add-row input[type=“text”] {
+.dep-add-row input[type=“text”] {
 flex: 1;
-min-width: 80px;
+min-width: 0;
 background: #f4f4f2;
 border: 1px solid #e2e2de;
 border-radius: 6px;
 font-family: ‘Space Mono’, monospace;
-font-size: 12px;
+font-size: 11px;
 color: #1a1a1a;
-padding: 7px 10px;
+padding: 6px 9px;
 outline: none;
 }
 
-.deposit-add-row input[type=“number”] {
-width: 100px;
+.dep-add-row input[type=“number”] {
+width: 90px;
 background: #f4f4f2;
 border: 1px solid #e2e2de;
 border-radius: 6px;
 font-family: ‘Space Mono’, monospace;
-font-size: 12px;
+font-size: 11px;
 color: #1a1a1a;
-padding: 7px 10px;
+padding: 6px 9px;
 outline: none;
--webkit-appearance: none;
 text-align: right;
+-webkit-appearance: none;
+flex-shrink: 0;
+}
+
+.dep-add-row input:focus { border-color: #1a1a1a; }
+
+.btn-add-dep {
+background: #1a1a1a;
+border: none;
+border-radius: 6px;
+font-family: ‘Space Mono’, monospace;
+font-size: 10px;
+font-weight: 700;
+color: #ffffff;
+padding: 6px 12px;
+cursor: pointer;
+white-space: nowrap;
+flex-shrink: 0;
 }
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 
-.deposit-add-row input:focus { border-color: #1a1a1a; }
-
-.btn-add-deposit {
-background: #1a1a1a;
-border: none;
-border-radius: 6px;
-font-family: ‘Space Mono’, monospace;
-font-size: 11px;
-font-weight: 700;
-color: #ffffff;
-padding: 7px 14px;
-cursor: pointer;
-white-space: nowrap;
+/* SPENDING */
+.spend-toggle-wrap {
+display: flex;
+gap: 4px;
 }
 
-/* ── SPENDING ── */
-.spending-grid {
+.spend-tog {
+font-family: ‘Space Mono’, monospace;
+font-size: 8px;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+border-radius: 20px;
+padding: 3px 9px;
+cursor: pointer;
+border: 1px solid #e2e2de;
+background: #f4f4f2;
+color: #8a8a86;
+transition: all 0.15s;
+}
+
+.spend-tog.active { background: #1a1a1a; color: #ffffff; border-color: #1a1a1a; }
+
+.spend-grid {
 display: grid;
 grid-template-columns: 1fr 1fr 1fr;
 gap: 1px;
 background: #e2e2de;
 }
 
-.spending-cell {
-background: #ffffff;
-padding: 14px 16px;
-}
+.spend-cell { background: #ffffff; padding: 12px 14px; }
+.spend-label { font-size: 8px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #8a8a86; margin-bottom: 5px; }
 
-.spending-label {
-font-size: 8px;
-font-weight: 700;
-letter-spacing: 0.15em;
-text-transform: uppercase;
-color: #8a8a86;
-margin-bottom: 6px;
-}
-
-.spending-input {
+.spend-input {
 width: 100%;
 background: #f4f4f2;
 border: 1px solid #e2e2de;
 border-radius: 5px;
 font-family: ‘Space Mono’, monospace;
-font-size: 14px;
+font-size: 13px;
 font-weight: 700;
 color: #1a1a1a;
-padding: 6px 8px;
+padding: 5px 7px;
 outline: none;
 -webkit-appearance: none;
 text-align: right;
 }
 
-.spending-input:focus { border-color: #1a1a1a; }
+.spend-input:focus { border-color: #1a1a1a; }
+.spend-sub { font-size: 9px; color: #8a8a86; margin-top: 3px; }
 
-.spending-sub {
-font-size: 9px;
+.spend-total-row {
+padding: 10px 16px;
+border-top: 1px solid #e2e2de;
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 11px;
 color: #8a8a86;
-margin-top: 4px;
 }
 
-/* ── BILLS ── */
-.bills-list { padding: 0 18px; }
+.spend-total-row strong { color: #1a1a1a; font-size: 13px; }
+
+/* BILLS */
+.bills-list { padding: 0 16px; }
+
+.bill-section-label {
+font-size: 8px;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: #c8c8c2;
+padding: 10px 0 2px;
+}
 
 .bill-item {
 display: grid;
 grid-template-columns: auto 1fr auto auto auto;
 grid-template-rows: auto 2px;
-gap: 8px;
+gap: 6px;
 align-items: center;
-padding: 10px 0;
+padding: 9px 0;
 border-bottom: 1px solid #f0f0ee;
 transition: opacity 0.2s;
 }
 
 .bill-item:last-child { border-bottom: none; }
-.bill-item.paid { opacity: 0.35; }
+.bill-item.paid { opacity: 0.32; }
 
 .paid-btn {
 width: 20px;
@@ -345,50 +342,36 @@ padding: 0;
 transition: all 0.15s;
 }
 
-.paid-btn.checked {
-background: #267a2a;
-border-color: #267a2a;
-color: #ffffff;
-}
+.paid-btn.checked { background: #267a2a; border-color: #267a2a; color: #ffffff; }
 
-.bill-name {
-background: transparent;
-border: none;
+.bill-info { min-width: 0; }
+.bill-name-text { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
+.bill-meta { display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+.bill-due { font-size: 9px; color: #8a8a86; }
+.bill-due.soon { color: #c87c1a; font-weight: 700; }
+.bill-due.urgent { color: #c93b2e; font-weight: 700; }
+
+.freq-tog {
 font-family: ‘Space Mono’, monospace;
-font-size: 11px;
+font-size: 7px;
 font-weight: 700;
-color: #1a1a1a;
-outline: none;
-width: 100%;
-text-transform: uppercase;
-letter-spacing: 0.05em;
-}
-
-.bill-name::placeholder { color: #c8c8c2; font-weight: 400; }
-
-.bill-amt-wrap {
-display: flex;
-align-items: center;
-gap: 2px;
-background: #f4f4f2;
+letter-spacing: 0.1em;
+border-radius: 10px;
+padding: 1px 6px;
+cursor: pointer;
 border: 1px solid #e2e2de;
-border-radius: 5px;
-padding: 4px 8px;
+background: #f4f4f2;
+color: #8a8a86;
+white-space: nowrap;
 }
 
-.bill-amt-wrap .sym { font-size: 10px; color: #8a8a86; }
+.freq-tog.W { background: #e8f8ee; border-color: #a8deb8; color: #1a6a30; }
+.freq-tog.M { background: #e8f0fb; border-color: #a8c0ee; color: #2450a0; }
+.freq-tog.Q { background: #fef3e2; border-color: #f0c878; color: #8a5000; }
 
-.bill-amt {
-background: transparent;
-border: none;
-font-family: ‘Space Mono’, monospace;
-font-size: 12px;
-color: #1a1a1a;
-outline: none;
-width: 68px;
-text-align: right;
--webkit-appearance: none;
-}
+.bill-amt-col { text-align: right; flex-shrink: 0; }
+.bill-amt-main { font-size: 12px; font-weight: 700; }
+.bill-amt-monthly { font-size: 9px; color: #8a8a86; margin-top: 1px; }
 
 .tag-btn {
 font-family: ‘Space Mono’, monospace;
@@ -396,89 +379,146 @@ font-size: 7px;
 font-weight: 700;
 letter-spacing: 0.1em;
 text-transform: uppercase;
-border-radius: 20px;
-padding: 3px 7px;
+border-radius: 10px;
+padding: 2px 7px;
 border: 1px solid #e2e2de;
 cursor: pointer;
-white-space: nowrap;
 background: #f4f4f2;
 color: #8a8a86;
+white-space: nowrap;
+flex-shrink: 0;
 }
 
 .tag-btn.need { background: #e8f0fb; border-color: #a8c0ee; color: #2450a0; }
 .tag-btn.want { background: #fef3e2; border-color: #f0c878; color: #8a5000; }
 
-.btn-del {
+.bill-bar { grid-column: 1 / -1; height: 2px; background: #f0f0ee; border-radius: 1px; }
+.bill-bar-fill { height: 100%; border-radius: 1px; transition: width 0.3s; background: #c8c8c2; }
+.bill-bar-fill.need { background: #5b8ee8; }
+.bill-bar-fill.want { background: #c87c1a; }
+.bill-bar-fill.paid-bar { background: #267a2a; }
+
+/* BILL EDIT MODAL */
+.bill-edit-row {
+display: none;
+grid-column: 1 / -1;
+gap: 6px;
+padding: 6px 0;
+align-items: center;
+}
+
+.bill-edit-row.open { display: flex; }
+
+.bill-name-input {
+flex: 1;
+background: #f4f4f2;
+border: 1px solid #e2e2de;
+border-radius: 5px;
+font-family: ‘Space Mono’, monospace;
+font-size: 11px;
+font-weight: 700;
+color: #1a1a1a;
+padding: 5px 8px;
+outline: none;
+text-transform: uppercase;
+}
+
+.bill-amt-input-wrap {
+display: flex;
+align-items: center;
+gap: 2px;
+background: #f4f4f2;
+border: 1px solid #e2e2de;
+border-radius: 5px;
+padding: 4px 7px;
+}
+
+.bill-amt-input-wrap .sym { font-size: 10px; color: #8a8a86; }
+
+.bill-amt-input {
+background: transparent;
+border: none;
+font-family: ‘Space Mono’, monospace;
+font-size: 12px;
+color: #1a1a1a;
+outline: none;
+width: 70px;
+text-align: right;
+-webkit-appearance: none;
+}
+
+.bill-due-input {
+background: #f4f4f2;
+border: 1px solid #e2e2de;
+border-radius: 5px;
+font-family: ‘Space Mono’, monospace;
+font-size: 10px;
+color: #1a1a1a;
+padding: 5px 7px;
+outline: none;
+width: 80px;
+}
+
+.btn-bill-del {
 background: none;
 border: none;
-font-size: 15px;
+font-size: 14px;
 color: #c8c8c2;
 cursor: pointer;
 padding: 0 2px;
 line-height: 1;
 }
 
-.btn-del:hover { color: #c93b2e; }
+.btn-bill-del:hover { color: #c93b2e; }
 
-.bill-bar { grid-column: 1 / -1; height: 2px; background: #f0f0ee; border-radius: 1px; }
-.bill-bar-fill { height: 100%; border-radius: 1px; transition: width 0.3s ease; background: #c8c8c2; }
-.bill-bar-fill.need { background: #5b8ee8; }
-.bill-bar-fill.want { background: #c87c1a; }
-.bill-bar-fill.paid-bar { background: #267a2a; }
-
-.section-label {
-font-size: 8px;
-font-weight: 700;
-letter-spacing: 0.18em;
-text-transform: uppercase;
-color: #c8c8c2;
-padding: 10px 0 2px;
-}
-
-.bills-tally {
+/* PROGRESS */
+.progress-wrap {
+padding: 14px 16px;
 border-top: 1px solid #e2e2de;
-padding: 12px 18px;
-display: flex;
-flex-direction: column;
-gap: 7px;
 }
 
-.tally-row {
+.progress-top {
 display: flex;
 justify-content: space-between;
-align-items: center;
-}
-
-.tally-row-label {
+margin-bottom: 7px;
 font-size: 9px;
 font-weight: 700;
 letter-spacing: 0.12em;
 text-transform: uppercase;
 color: #8a8a86;
+}
+
+.progress-bar { height: 7px; background: #f0f0ee; border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 4px; transition: width 0.5s; background: #267a2a; }
+
+/* TALLY */
+.bills-tally {
+border-top: 1px solid #e2e2de;
+padding: 10px 16px;
 display: flex;
-align-items: center;
+flex-direction: column;
 gap: 6px;
 }
 
-.tally-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-.tally-val { font-size: 13px; font-weight: 700; }
+.tally-row { display: flex; justify-content: space-between; align-items: center; }
+.tally-lbl { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #8a8a86; display: flex; align-items: center; gap: 5px; }
+.tally-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.tally-val { font-size: 12px; font-weight: 700; }
 .tally-val.green { color: #267a2a; }
 .tally-val.red   { color: #c93b2e; }
-.tally-val.dark  { color: #1a1a1a; font-size: 15px; }
-.tally-divider-line { height: 1px; background: #e2e2de; margin: 2px 0; }
+.tally-val.dark  { color: #1a1a1a; font-size: 14px; }
+.tally-line { height: 1px; background: #e2e2de; }
 
-.bills-footer {
-padding: 10px 18px;
-border-top: 1px solid #e2e2de;
-}
+/* ADD BILL */
+.bills-footer { padding: 10px 16px; border-top: 1px solid #e2e2de; }
 
-.btn-add {
+.btn-add-bill {
 width: 100%;
 background: transparent;
 border: 1px dashed #c8c8c2;
 border-radius: 6px;
 font-family: ‘Space Mono’, monospace;
-font-size: 10px;
+font-size: 9px;
 font-weight: 700;
 letter-spacing: 0.1em;
 text-transform: uppercase;
@@ -487,59 +527,20 @@ padding: 8px;
 cursor: pointer;
 }
 
-.btn-add:hover { border-color: #1a1a1a; color: #1a1a1a; }
-
-/* ── PROGRESS BAR ── */
-.progress-wrap {
-padding: 16px 18px;
-border-top: 1px solid #e2e2de;
-}
-
-.progress-label {
-display: flex;
-justify-content: space-between;
-margin-bottom: 8px;
-font-size: 9px;
-font-weight: 700;
-letter-spacing: 0.12em;
-text-transform: uppercase;
-color: #8a8a86;
-}
-
-.progress-bar {
-height: 8px;
-background: #f0f0ee;
-border-radius: 4px;
-overflow: hidden;
-}
-
-.progress-fill {
-height: 100%;
-border-radius: 4px;
-transition: width 0.5s ease;
-background: #267a2a;
-}
-
-.progress-fill.warning { background: #c87c1a; }
-.progress-fill.danger  { background: #c93b2e; }
+.btn-add-bill:hover { border-color: #1a1a1a; color: #1a1a1a; }
 
 @media (max-width: 480px) {
 .site-header { padding: 12px 14px; }
-.balance-amount { font-size: 38px; }
-.balance-grid { grid-template-columns: 1fr 1fr 1fr; }
-.balance-cell { padding: 10px 10px; }
-.balance-cell-val { font-size: 12px; }
-.spending-grid { grid-template-columns: 1fr 1fr 1fr; }
-.deposit-add-row { gap: 6px; }
-.deposit-add-row input[type=“text”] { min-width: 60px; }
-.deposit-add-row input[type=“number”] { width: 85px; }
+.hero-amount { font-size: 36px; }
+.hero-cell-val { font-size: 11px; }
+.dep-add-row input[type=“number”] { width: 80px; }
 }
 
 @media print {
-@page { margin: 15mm; size: A4; }
+@page { margin: 15mm; }
 body { background: #fff !important; padding-bottom: 0; }
-.btn-reset, .btn-pdf, .btn-add, .btn-del, .paid-btn, .deposit-add-row, .bills-footer { display: none !important; }
-.balance-hero { background: #1a1a1a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.btn-header, .btn-add-dep, .btn-add-bill, .btn-bill-del, .paid-btn, .dep-add-row, .bills-footer, .collapse-btn { display: none !important; }
+.hero { background: #1a1a1a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 </style>
 
@@ -549,31 +550,31 @@ body { background: #fff !important; padding-bottom: 0; }
 <header class="site-header">
   <div class="site-title">Budget OS</div>
   <div class="header-right">
-    <button class="btn-reset" onclick="resetAll()">New Month</button>
-    <button class="btn-pdf" onclick="window.print()">&#8595; PDF</button>
+    <button class="btn-header btn-new-month" onclick="newMonth()">New Month</button>
+    <button class="btn-header btn-pdf" onclick="window.print()">&#8595; PDF</button>
   </div>
 </header>
 
 <div class="main">
 
-  <!-- BALANCE HERO -->
+  <!-- HERO -->
 
-  <div class="balance-hero">
-    <div class="balance-period" id="hero-period">May 2026</div>
-    <div class="balance-amount positive" id="hero-balance">$0.00</div>
-    <div class="balance-sub" id="hero-sub">after bills paid &amp; spending</div>
-    <div class="balance-grid">
-      <div class="balance-cell">
-        <div class="balance-cell-label">Deposited</div>
-        <div class="balance-cell-val green" id="hero-deposited">$0</div>
+  <div class="hero">
+    <div class="hero-label" id="hero-period">May 2026</div>
+    <div class="hero-amount pos" id="hero-balance">$0.00</div>
+    <div class="hero-sub" id="hero-sub">add deposits to get started</div>
+    <div class="hero-grid">
+      <div class="hero-cell">
+        <div class="hero-cell-label">Deposited</div>
+        <div class="hero-cell-val green" id="hero-dep">$0</div>
       </div>
-      <div class="balance-cell">
-        <div class="balance-cell-label">Bills Left</div>
-        <div class="balance-cell-val red" id="hero-bills-left">$0</div>
+      <div class="hero-cell">
+        <div class="hero-cell-label">Bills Left</div>
+        <div class="hero-cell-val red" id="hero-bills-left">$0</div>
       </div>
-      <div class="balance-cell">
-        <div class="balance-cell-label">Spending</div>
-        <div class="balance-cell-val gold" id="hero-spending">$0</div>
+      <div class="hero-cell">
+        <div class="hero-cell-label">Spending/mo</div>
+        <div class="hero-cell-val gold" id="hero-spend">$0</div>
       </div>
     </div>
   </div>
@@ -583,15 +584,20 @@ body { background: #fff !important; padding-bottom: 0; }
   <div class="card">
     <div class="card-header">
       <span class="card-title">Deposits This Period</span>
-      <span style="font-size:11px;font-weight:700;color:#267a2a" id="deposit-total">$0.00</span>
+      <div style="display:flex;align-items:center;gap:10px">
+        <button class="collapse-btn" id="dep-toggle-btn" onclick="toggleDeposits()">Hide</button>
+        <span class="card-badge" id="dep-total">$0.00</span>
+      </div>
     </div>
-    <div class="deposit-list" id="deposit-list">
-      <div style="padding:16px 0;font-size:11px;color:#8a8a86;text-align:center">No deposits yet &#8212; add your first paycheck below</div>
+    <div id="dep-list-wrap">
+      <div class="deposit-list" id="dep-list">
+        <div class="deposit-empty">No deposits yet &#8212; add your first paycheck below</div>
+      </div>
     </div>
-    <div class="deposit-add-row">
-      <input type="text" id="dep-label" placeholder="Description" value="PAYROLL">
-      <input type="number" id="dep-amount" placeholder="0.00">
-      <button class="btn-add-deposit" onclick="addDeposit()">+ Add</button>
+    <div class="dep-add-row">
+      <input type="text" id="dep-label" placeholder="PAYROLL" value="PAYROLL">
+      <input type="number" id="dep-amt" placeholder="0.00">
+      <button class="btn-add-dep" onclick="addDeposit()">+ Add</button>
     </div>
   </div>
 
@@ -599,25 +605,32 @@ body { background: #fff !important; padding-bottom: 0; }
 
   <div class="card">
     <div class="card-header">
-      <span class="card-title">Weekly Spending Money</span>
-      <span style="font-size:10px;color:#8a8a86" id="spend-total-label">$0 / week</span>
+      <span class="card-title">Spending Money</span>
+      <div class="spend-toggle-wrap">
+        <button class="spend-tog active" id="sp-wk-btn" onclick="setSpendPeriod('weekly')">Wk</button>
+        <button class="spend-tog" id="sp-mo-btn" onclick="setSpendPeriod('monthly')">Mo</button>
+      </div>
     </div>
-    <div class="spending-grid">
-      <div class="spending-cell">
-        <div class="spending-label">Cody</div>
-        <input type="number" class="spending-input" id="sp-cody" value="300" oninput="recalc()">
-        <div class="spending-sub">/week</div>
+    <div class="spend-grid">
+      <div class="spend-cell">
+        <div class="spend-label">Cody</div>
+        <input type="number" class="spend-input" id="sp-cody" value="300" oninput="recalc()">
+        <div class="spend-sub" id="sp-cody-sub">$1,299/mo</div>
       </div>
-      <div class="spending-cell">
-        <div class="spending-label">Katie</div>
-        <input type="number" class="spending-input" id="sp-katie" value="300" oninput="recalc()">
-        <div class="spending-sub">/week</div>
+      <div class="spend-cell">
+        <div class="spend-label">Katie</div>
+        <input type="number" class="spend-input" id="sp-katie" value="300" oninput="recalc()">
+        <div class="spend-sub" id="sp-katie-sub">$1,299/mo</div>
       </div>
-      <div class="spending-cell">
-        <div class="spending-label">Hailey</div>
-        <input type="number" class="spending-input" id="sp-kid" value="50" oninput="recalc()">
-        <div class="spending-sub">/week</div>
+      <div class="spend-cell">
+        <div class="spend-label">Hailey</div>
+        <input type="number" class="spend-input" id="sp-kid" value="50" oninput="recalc()">
+        <div class="spend-sub" id="sp-kid-sub">$216.50/mo</div>
       </div>
+    </div>
+    <div class="spend-total-row">
+      <span id="sp-period-label">Weekly total</span>
+      <strong id="sp-total">$650</strong>
     </div>
   </div>
 
@@ -625,52 +638,61 @@ body { background: #fff !important; padding-bottom: 0; }
 
   <div class="card">
     <div class="card-header">
-      <span class="card-title">Monthly Bills</span>
-      <span style="font-size:10px;color:#8a8a86" id="bills-progress-label">0 of 0 paid</span>
+      <span class="card-title">Bills</span>
+      <span style="font-size:10px;color:#8a8a86" id="bills-count-label">0 of 0 paid</span>
     </div>
     <div class="bills-list" id="bills-list"></div>
-
-```
-<!-- Bill payment progress bar -->
-<div class="progress-wrap">
-  <div class="progress-label">
-    <span>Bills Paid</span>
-    <span id="progress-pct">0%</span>
-  </div>
-  <div class="progress-bar">
-    <div class="progress-fill" id="progress-fill" style="width:0%"></div>
-  </div>
-</div>
-
-<div class="bills-tally" id="bills-tally"></div>
-<div class="bills-footer">
-  <button class="btn-add" onclick="addBill()">+ Add Bill</button>
-</div>
-```
-
+    <div class="progress-wrap">
+      <div class="progress-top">
+        <span>Bills Paid</span>
+        <span id="prog-pct">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="prog-fill" style="width:0%"></div>
+      </div>
+    </div>
+    <div class="bills-tally" id="bills-tally"></div>
+    <div class="bills-footer">
+      <button class="btn-add-bill" onclick="addBill()">+ Add Bill</button>
+    </div>
   </div>
 
 </div>
 
 <script>
 var deposits = [];
+var depVisible = true;
+var spendPeriod = 'weekly';
 
 var bills = [
-  { name: 'MORTGAGE',        amt: 2104.84, tag: 'need', paid: false },
-  { name: 'LIBERTY MUTUAL',  amt: 457.21,  tag: 'need', paid: false },
-  { name: 'CSU UTILITIES',   amt: 259.00,  tag: 'need', paid: false },
-  { name: 'RAV4 PAYMENT',    amt: 303.08,  tag: 'need', paid: false },
-  { name: 'T-MOBILE',        amt: 175.25,  tag: 'need', paid: false },
-  { name: 'METRONET',        amt: 72.90,   tag: 'need', paid: false },
-  { name: 'KATIE GAS',       amt: 100.00,  tag: 'need', paid: false },
-  { name: 'QUICK QUACK',     amt: 61.99,   tag: 'want', paid: false },
-  { name: 'YOUTUBE PREMIUM', amt: 25.08,   tag: 'want', paid: false },
-  { name: 'HBO/HULU/DISNEY', amt: 34.69,   tag: 'want', paid: false }
+  { name: 'QUICK QUACK',     amt: 61.99,   freq: 'M', tag: 'want', due: 'May 12',  paid: false },
+  { name: 'LIBERTY MUTUAL',  amt: 457.21,  freq: 'M', tag: 'need', due: 'May 17',  paid: false },
+  { name: 'RAV4 PAYMENT',    amt: 303.08,  freq: 'M', tag: 'need', due: 'May 17',  paid: false },
+  { name: 'METRONET',        amt: 72.90,   freq: 'M', tag: 'need', due: 'May 25',  paid: false },
+  { name: 'T-MOBILE',        amt: 175.25,  freq: 'M', tag: 'need', due: 'May 25',  paid: false },
+  { name: 'MORTGAGE',        amt: 2104.84, freq: 'M', tag: 'need', due: 'May 31',  paid: false },
+  { name: 'CSU UTILITIES',   amt: 259.00,  freq: 'M', tag: 'need', due: 'Jun 8',   paid: false },
+  { name: 'EL DORADO WATER', amt: 80.90,   freq: 'M', tag: 'need', due: '',        paid: false },
+  { name: 'KATIE GAS',       amt: 100.00,  freq: 'W', tag: 'need', due: '',        paid: false },
+  { name: 'HOA DUES',        amt: 82.98,   freq: 'Q', tag: 'need', due: '',        paid: false },
+  { name: 'SOCO TRASH',      amt: 123.85,  freq: 'Q', tag: 'need', due: '',        paid: false },
+  { name: 'YOUTUBE PREMIUM', amt: 25.08,   freq: 'M', tag: 'want', due: '',        paid: false },
+  { name: 'HBO/HULU/DISNEY', amt: 34.69,   freq: 'M', tag: 'want', due: '',        paid: false }
 ];
 
 function fmt(n) {
   var neg = n < 0;
   return (neg ? '-$' : '$') + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function fmtShort(n) {
+  return '$' + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+}
+
+function monthlyAmt(bill) {
+  if (bill.freq === 'W') return bill.amt * 4.33;
+  if (bill.freq === 'Q') return bill.amt / 3;
+  return bill.amt;
 }
 
 function getDeposited() {
@@ -680,31 +702,41 @@ function getDeposited() {
 function getBillTotals() {
   var paid = 0, unpaid = 0;
   bills.forEach(function(b) {
-    if (b.paid) paid += b.amt;
-    else unpaid += b.amt;
+    var mo = monthlyAmt(b);
+    if (b.paid) paid += mo;
+    else unpaid += mo;
   });
   return { paid: paid, unpaid: unpaid, total: paid + unpaid };
 }
 
-function getWeeklySpend() {
-  return (parseFloat(document.getElementById('sp-cody').value)  || 0)
-       + (parseFloat(document.getElementById('sp-katie').value) || 0)
-       + (parseFloat(document.getElementById('sp-kid').value)   || 0);
+function getSpendMonthly() {
+  var c = parseFloat(document.getElementById('sp-cody').value)  || 0;
+  var k = parseFloat(document.getElementById('sp-katie').value) || 0;
+  var h = parseFloat(document.getElementById('sp-kid').value)   || 0;
+  if (spendPeriod === 'weekly') return (c + k + h) * 4.33;
+  return c + k + h;
+}
+
+function getSpendWeekly() {
+  var c = parseFloat(document.getElementById('sp-cody').value)  || 0;
+  var k = parseFloat(document.getElementById('sp-katie').value) || 0;
+  var h = parseFloat(document.getElementById('sp-kid').value)   || 0;
+  if (spendPeriod === 'weekly') return c + k + h;
+  return (c + k + h) / 4.33;
 }
 
 function currentMonth() {
-  var d = new Date();
-  return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  return new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 }
 
+/* ── Deposits ── */
 function addDeposit() {
-  var label  = document.getElementById('dep-label').value.trim() || 'DEPOSIT';
-  var amount = parseFloat(document.getElementById('dep-amount').value) || 0;
-  if (amount <= 0) return;
-  var now = new Date();
-  var dateStr = (now.getMonth()+1) + '/' + now.getDate();
-  deposits.push({ label: label.toUpperCase(), amt: amount, date: dateStr });
-  document.getElementById('dep-amount').value = '';
+  var label = (document.getElementById('dep-label').value.trim() || 'DEPOSIT').toUpperCase();
+  var amt   = parseFloat(document.getElementById('dep-amt').value) || 0;
+  if (amt <= 0) return;
+  var d = new Date();
+  deposits.push({ label: label, amt: amt, date: (d.getMonth()+1) + '/' + d.getDate() });
+  document.getElementById('dep-amt').value = '';
   document.getElementById('dep-label').value = 'PAYROLL';
   renderDeposits();
   recalc();
@@ -716,10 +748,16 @@ function removeDeposit(i) {
   recalc();
 }
 
+function toggleDeposits() {
+  depVisible = !depVisible;
+  document.getElementById('dep-list-wrap').style.display = depVisible ? '' : 'none';
+  document.getElementById('dep-toggle-btn').textContent = depVisible ? 'Hide' : 'Show (' + deposits.length + ')';
+}
+
 function renderDeposits() {
-  var container = document.getElementById('deposit-list');
+  var container = document.getElementById('dep-list');
   if (deposits.length === 0) {
-    container.innerHTML = '<div style="padding:16px 0;font-size:11px;color:#8a8a86;text-align:center">No deposits yet &#8212; add your first paycheck below</div>';
+    container.innerHTML = '<div class="deposit-empty">No deposits yet &#8212; add your first paycheck below</div>';
     return;
   }
   container.innerHTML = '';
@@ -727,16 +765,35 @@ function renderDeposits() {
     var div = document.createElement('div');
     div.className = 'deposit-item';
     div.innerHTML =
-      '<div class="deposit-label">' + d.label + '</div>' +
-      '<div class="deposit-date">' + d.date + '</div>' +
-      '<div class="deposit-amount">+' + fmt(d.amt) + '</div>' +
-      '<button class="deposit-del" onclick="removeDeposit(' + i + ')">x</button>';
+      '<div class="deposit-info"><div class="deposit-name">' + d.label + '</div><div class="deposit-date">' + d.date + '</div></div>' +
+      '<div class="deposit-amt">+' + fmt(d.amt) + '</div>' +
+      '<button class="deposit-del" onclick="removeDeposit(' + i + ')">&#215;</button>';
     container.appendChild(div);
   });
+  if (!depVisible) {
+    document.getElementById('dep-list-wrap').style.display = 'none';
+    document.getElementById('dep-toggle-btn').textContent = 'Show (' + deposits.length + ')';
+  }
 }
 
+/* ── Spending toggle ── */
+function setSpendPeriod(p) {
+  spendPeriod = p;
+  document.getElementById('sp-wk-btn').classList.toggle('active', p === 'weekly');
+  document.getElementById('sp-mo-btn').classList.toggle('active', p === 'monthly');
+  recalc();
+}
+
+/* ── Bills ── */
 function togglePaid(i) {
   bills[i].paid = !bills[i].paid;
+  renderBills();
+  recalc();
+}
+
+function cycleFreq(i) {
+  var f = bills[i].freq;
+  bills[i].freq = f === 'M' ? 'W' : f === 'W' ? 'Q' : 'M';
   renderBills();
   recalc();
 }
@@ -748,16 +805,40 @@ function cycleTag(i) {
   recalc();
 }
 
+function toggleEdit(i) {
+  var row = document.getElementById('edit-row-' + i);
+  if (row) row.classList.toggle('open');
+}
+
+function dueUrgency(due) {
+  if (!due) return '';
+  var months = { 'Jan':0,'Feb':1,'Mar':2,'Apr':3,'May':4,'Jun':5,'Jul':6,'Aug':7,'Sep':8,'Oct':9,'Nov':10,'Dec':11 };
+  var parts = due.split(' ');
+  if (parts.length < 2) return '';
+  var mo = months[parts[0]];
+  var day = parseInt(parts[1]);
+  if (isNaN(day) || mo === undefined) return '';
+  var now = new Date();
+  var due_date = new Date(now.getFullYear(), mo, day);
+  var diff = Math.ceil((due_date - now) / 86400000);
+  if (diff <= 3) return 'urgent';
+  if (diff <= 7) return 'soon';
+  return '';
+}
+
 function getSortedBills() {
   var needs = [], wants = [], none = [];
   bills.forEach(function(b, i) {
-    var obj = { bill: b, idx: i };
+    var obj = { b: b, i: i };
     if (b.tag === 'want') wants.push(obj);
     else if (b.tag === 'need') needs.push(obj);
     else none.push(obj);
   });
   function sortGroup(arr) {
-    return arr.sort(function(a, b) { return (a.bill.paid ? 1 : 0) - (b.bill.paid ? 1 : 0); });
+    return arr.sort(function(a, b) {
+      if (a.b.paid !== b.b.paid) return (a.b.paid ? 1 : 0) - (b.b.paid ? 1 : 0);
+      return 0;
+    });
   }
   return sortGroup(needs).concat(sortGroup(none)).concat(sortGroup(wants));
 }
@@ -772,68 +853,73 @@ function renderBills() {
   var wantStarted = false;
 
   sorted.forEach(function(obj) {
-    var bill = obj.bill;
-    var i    = obj.idx;
+    var b = obj.b;
+    var i = obj.i;
+    var mo = monthlyAmt(b);
+    var pct = bt.total > 0 ? (mo / bt.total) * 100 : 0;
+    var tag = b.tag || 'none';
+    var tagLabel = tag === 'need' ? 'Need' : tag === 'want' ? 'Want' : '-';
+    var barClass = b.paid ? 'paid-bar' : (tag !== 'none' ? tag : '');
+    var urgency = dueUrgency(b.due);
 
-    if (bill.tag === 'want' && !wantStarted) {
+    if (tag === 'want' && !wantStarted) {
       wantStarted = true;
       var lbl = document.createElement('div');
-      lbl.className = 'section-label';
+      lbl.className = 'bill-section-label';
       lbl.textContent = 'Wants';
       container.appendChild(lbl);
     }
 
-    var pct      = bt.total > 0 ? (bill.amt / bt.total) * 100 : 0;
-    var tag      = bill.tag || 'none';
-    var tagLabel = tag === 'need' ? 'Need' : tag === 'want' ? 'Want' : '-';
-    var barClass = bill.paid ? 'paid-bar' : (tag !== 'none' ? tag : '');
+    var freqLabel = b.freq === 'W' ? 'Weekly' : b.freq === 'Q' ? 'Quarterly' : 'Monthly';
+    var showMonthly = b.freq !== 'M' ? '<div class="bill-amt-monthly">' + fmt(mo) + '/mo</div>' : '';
+    var dueHtml = b.due ? '<span class="bill-due ' + urgency + '">' + b.due + '</span>' : '';
 
     var div = document.createElement('div');
-    div.className = 'bill-item' + (bill.paid ? ' paid' : '');
+    div.className = 'bill-item' + (b.paid ? ' paid' : '');
     div.innerHTML =
-      '<button class="paid-btn ' + (bill.paid ? 'checked' : '') + '" onclick="togglePaid(' + i + ')">' + (bill.paid ? '&#10003;' : '') + '</button>' +
-      '<input class="bill-name" type="text" value="' + bill.name + '" placeholder="BILL NAME" onchange="bills[' + i + '].name = this.value">' +
-      '<div class="bill-amt-wrap"><span class="sym">$</span><input class="bill-amt" type="number" value="' + bill.amt + '" oninput="bills[' + i + '].amt = parseFloat(this.value)||0; recalc()"></div>' +
-      '<button class="tag-btn ' + (tag !== 'none' ? tag : '') + '" onclick="cycleTag(' + i + ')">' + tagLabel + '</button>' +
-      '<button class="btn-del" onclick="removeBill(' + i + ')">x</button>' +
-      '<div class="bill-bar"><div class="bill-bar-fill ' + barClass + '" style="width:' + Math.min(100, pct * 1.5) + '%"></div></div>';
+      '<button class="paid-btn ' + (b.paid ? 'checked' : '') + '" onclick="togglePaid(' + i + ')">' + (b.paid ? '&#10003;' : '') + '</button>' +
+      '<div class="bill-info" onclick="toggleEdit(' + i + ')" style="cursor:pointer">' +
+        '<div class="bill-name-text">' + b.name + '</div>' +
+        '<div class="bill-meta">' +
+          dueHtml +
+          '<button class="freq-tog ' + b.freq + '" onclick="event.stopPropagation();cycleFreq(' + i + ')">' + freqLabel + '</button>' +
+          '<button class="tag-btn ' + (tag !== 'none' ? tag : '') + '" onclick="event.stopPropagation();cycleTag(' + i + ')">' + tagLabel + '</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="bill-amt-col"><div class="bill-amt-main">' + fmt(b.amt) + '</div>' + showMonthly + '</div>' +
+      '<button class="btn-bill-del" onclick="removeBill(' + i + ')">&#215;</button>' +
+      '<div class="bill-bar"><div class="bill-bar-fill ' + barClass + '" style="width:' + Math.min(100, pct * 1.5) + '%"></div></div>' +
+      '<div class="bill-edit-row" id="edit-row-' + i + '">' +
+        '<input class="bill-name-input" type="text" value="' + b.name + '" placeholder="BILL NAME" oninput="bills[' + i + '].name=this.value.toUpperCase();renderBills()">' +
+        '<div class="bill-amt-input-wrap"><span class="sym">$</span><input class="bill-amt-input" type="number" value="' + b.amt + '" oninput="bills[' + i + '].amt=parseFloat(this.value)||0;recalc()"></div>' +
+        '<input class="bill-due-input" type="text" value="' + b.due + '" placeholder="Due date" oninput="bills[' + i + '].due=this.value;renderBills()">' +
+      '</div>';
     container.appendChild(div);
   });
 
-  // Progress bar
+  // Progress
   var paidCount = bills.filter(function(b) { return b.paid; }).length;
-  var paidPct   = bills.length > 0 ? (bt.paid / bt.total) * 100 : 0;
-  document.getElementById('bills-progress-label').textContent = paidCount + ' of ' + bills.length + ' paid';
-  document.getElementById('progress-pct').textContent = paidPct.toFixed(0) + '%';
-  var fill = document.getElementById('progress-fill');
-  fill.style.width = paidPct + '%';
-  fill.className = 'progress-fill' + (paidPct >= 100 ? '' : paidPct >= 60 ? ' warning' : '');
-  if (paidPct >= 100) fill.className = 'progress-fill';
+  var paidPct   = bt.total > 0 ? (bt.paid / bt.total) * 100 : 0;
+  document.getElementById('bills-count-label').textContent = paidCount + ' of ' + bills.length + ' paid';
+  document.getElementById('prog-pct').textContent = paidPct.toFixed(0) + '%';
+  document.getElementById('prog-fill').style.width = paidPct + '%';
 
   // Tally
   tally.innerHTML =
-    '<div class="tally-row">' +
-      '<div class="tally-row-label"><div class="tally-dot" style="background:#267a2a"></div>Paid</div>' +
-      '<div class="tally-val green">' + fmt(bt.paid) + '</div>' +
-    '</div>' +
-    '<div class="tally-row">' +
-      '<div class="tally-row-label"><div class="tally-dot" style="background:#c93b2e"></div>Remaining</div>' +
-      '<div class="tally-val red">' + fmt(bt.unpaid) + '</div>' +
-    '</div>' +
-    '<div class="tally-divider-line"></div>' +
-    '<div class="tally-row">' +
-      '<div class="tally-row-label">Total Bills</div>' +
-      '<div class="tally-val dark">' + fmt(bt.total) + '</div>' +
-    '</div>';
+    '<div class="tally-row"><div class="tally-lbl"><div class="tally-dot" style="background:#267a2a"></div>Paid</div><div class="tally-val green">' + fmt(bt.paid) + '</div></div>' +
+    '<div class="tally-row"><div class="tally-lbl"><div class="tally-dot" style="background:#c93b2e"></div>Remaining</div><div class="tally-val red">' + fmt(bt.unpaid) + '</div></div>' +
+    '<div class="tally-line"></div>' +
+    '<div class="tally-row"><div class="tally-lbl">Total / Month</div><div class="tally-val dark">' + fmt(bt.total) + '</div></div>';
 }
 
 function addBill() {
-  bills.push({ name: '', amt: 0, tag: 'none', paid: false });
+  bills.push({ name: '', amt: 0, freq: 'M', tag: 'need', due: '', paid: false });
   renderBills();
   recalc();
   setTimeout(function() {
-    var inputs = document.querySelectorAll('.bill-name');
-    inputs[inputs.length - 1].focus();
+    var rows = document.querySelectorAll('.bill-edit-row');
+    var last = rows[rows.length - 1];
+    if (last) { last.classList.add('open'); last.querySelector('.bill-name-input').focus(); }
   }, 0);
 }
 
@@ -843,38 +929,58 @@ function removeBill(i) {
   recalc();
 }
 
-function resetAll() {
-  if (!confirm('Start a new month? This will clear all deposits and mark all bills unpaid.')) return;
+function newMonth() {
+  if (!confirm('Start new month? Clears all deposits and resets paid bills.')) return;
   deposits = [];
   bills.forEach(function(b) { b.paid = false; });
+  depVisible = true;
+  document.getElementById('dep-list-wrap').style.display = '';
+  document.getElementById('dep-toggle-btn').textContent = 'Hide';
   renderDeposits();
   renderBills();
   recalc();
 }
 
+/* ── Main recalc ── */
 function recalc() {
-  var deposited   = getDeposited();
-  var bt          = getBillTotals();
-  var weeklySpend = getWeeklySpend();
-  var balance     = deposited - bt.unpaid - weeklySpend;
+  var deposited    = getDeposited();
+  var bt           = getBillTotals();
+  var spendMonthly = getSpendMonthly();
+  var spendWeekly  = getSpendWeekly();
+  var balance      = deposited - bt.unpaid - spendMonthly;
 
   // Hero
   document.getElementById('hero-period').textContent = currentMonth();
   var heroEl = document.getElementById('hero-balance');
   heroEl.textContent = fmt(balance);
-  heroEl.className = 'balance-amount ' + (balance >= 0 ? 'positive' : 'negative');
-  document.getElementById('hero-sub').textContent = balance >= 0
-    ? 'available after bills and spending'
-    : 'short — more deposits needed';
-  document.getElementById('hero-deposited').textContent  = fmt(deposited);
+  heroEl.className = 'hero-amount ' + (balance >= 0 ? 'pos' : 'neg');
+  document.getElementById('hero-sub').textContent = deposits.length === 0
+    ? 'add deposits to get started'
+    : (balance >= 0 ? 'available after bills and spending' : 'short &#8212; more deposits needed');
+  document.getElementById('hero-dep').textContent        = fmt(deposited);
   document.getElementById('hero-bills-left').textContent = fmt(bt.unpaid);
-  document.getElementById('hero-spending').textContent   = fmt(weeklySpend);
+  document.getElementById('hero-spend').textContent      = fmt(spendMonthly);
 
-  // Deposit total
-  document.getElementById('deposit-total').textContent = fmt(deposited);
+  // Deposit total badge
+  document.getElementById('dep-total').textContent = fmt(deposited);
 
-  // Spending label
-  document.getElementById('spend-total-label').textContent = fmt(weeklySpend) + ' / week';
+  // Spending subs
+  var c = parseFloat(document.getElementById('sp-cody').value)  || 0;
+  var k = parseFloat(document.getElementById('sp-katie').value) || 0;
+  var h = parseFloat(document.getElementById('sp-kid').value)   || 0;
+  if (spendPeriod === 'weekly') {
+    document.getElementById('sp-cody-sub').textContent  = fmt(c * 4.33) + '/mo';
+    document.getElementById('sp-katie-sub').textContent = fmt(k * 4.33) + '/mo';
+    document.getElementById('sp-kid-sub').textContent   = fmt(h * 4.33) + '/mo';
+    document.getElementById('sp-period-label').textContent = 'Weekly total';
+    document.getElementById('sp-total').textContent = fmt(c + k + h);
+  } else {
+    document.getElementById('sp-cody-sub').textContent  = fmt(c / 4.33) + '/wk';
+    document.getElementById('sp-katie-sub').textContent = fmt(k / 4.33) + '/wk';
+    document.getElementById('sp-kid-sub').textContent   = fmt(h / 4.33) + '/wk';
+    document.getElementById('sp-period-label').textContent = 'Monthly total';
+    document.getElementById('sp-total').textContent = fmt(c + k + h);
+  }
 
   renderBills();
 }
