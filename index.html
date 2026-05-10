@@ -20,11 +20,11 @@ padding-bottom: 80px;
 .site-header {
 background: #ffffff;
 border-bottom: 1px solid #e2e2de;
-padding: 16px 24px;
+padding: 14px 20px;
 display: flex;
 align-items: center;
 justify-content: space-between;
-gap: 12px;
+gap: 10px;
 }
 
 .site-title {
@@ -35,55 +35,112 @@ text-transform: uppercase;
 flex-shrink: 0;
 }
 
-.header-right { display: flex; align-items: center; gap: 10px; }
+.header-right { display: flex; align-items: center; gap: 8px; }
 
-.date-input {
+.btn-reset {
 font-family: ‘Space Mono’, monospace;
-font-size: 10px;
+font-size: 9px;
 font-weight: 700;
-letter-spacing: 0.12em;
-color: #8a8a86;
-background: #f4f4f2;
-border: 1px solid #e2e2de;
-border-radius: 20px;
-padding: 4px 12px;
-outline: none;
-cursor: pointer;
--webkit-appearance: none;
+letter-spacing: 0.1em;
 text-transform: uppercase;
-width: 148px;
+color: #c93b2e;
+background: #fff0ee;
+border: 1px solid #f0c0ba;
+border-radius: 20px;
+padding: 5px 12px;
+cursor: pointer;
 }
-
-.date-input:focus { border-color: #c8c8c2; color: #1a1a1a; }
-.date-input::-webkit-calendar-picker-indicator { opacity: 0.4; cursor: pointer; margin-left: 2px; }
 
 .btn-pdf {
 font-family: ‘Space Mono’, monospace;
-font-size: 10px;
+font-size: 9px;
 font-weight: 700;
-letter-spacing: 0.12em;
+letter-spacing: 0.1em;
 text-transform: uppercase;
 color: #ffffff;
 background: #1a1a1a;
 border: none;
 border-radius: 20px;
-padding: 5px 14px;
+padding: 5px 12px;
 cursor: pointer;
-transition: opacity 0.15s;
-flex-shrink: 0;
 }
-
-.btn-pdf:hover { opacity: 0.75; }
 
 .main {
 max-width: 580px;
 margin: 0 auto;
-padding: 28px 16px;
+padding: 20px 16px;
 display: flex;
 flex-direction: column;
-gap: 14px;
+gap: 12px;
 }
 
+/* ── BALANCE HERO ── */
+.balance-hero {
+background: #1a1a1a;
+border-radius: 12px;
+padding: 24px 20px 20px;
+color: #ffffff;
+}
+
+.balance-period {
+font-size: 9px;
+font-weight: 700;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: #8a8a86;
+margin-bottom: 6px;
+}
+
+.balance-amount {
+font-size: 48px;
+font-weight: 700;
+letter-spacing: -0.03em;
+line-height: 1;
+margin-bottom: 4px;
+}
+
+.balance-amount.positive { color: #7bbf90; }
+.balance-amount.negative { color: #f08070; }
+
+.balance-sub {
+font-size: 11px;
+color: #8a8a86;
+margin-bottom: 20px;
+}
+
+.balance-grid {
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+gap: 1px;
+background: #2e2e2e;
+border-radius: 8px;
+overflow: hidden;
+}
+
+.balance-cell {
+background: #242424;
+padding: 12px 14px;
+}
+
+.balance-cell-label {
+font-size: 8px;
+font-weight: 700;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+color: #8a8a86;
+margin-bottom: 4px;
+}
+
+.balance-cell-val {
+font-size: 14px;
+font-weight: 700;
+}
+
+.balance-cell-val.green { color: #7bbf90; }
+.balance-cell-val.red   { color: #f08070; }
+.balance-cell-val.gold  { color: #c8a84c; }
+
+/* ── CARD ── */
 .card {
 background: #ffffff;
 border: 1px solid #e2e2de;
@@ -92,7 +149,7 @@ overflow: hidden;
 }
 
 .card-header {
-padding: 14px 20px;
+padding: 12px 18px;
 border-bottom: 1px solid #e2e2de;
 display: flex;
 align-items: center;
@@ -107,177 +164,207 @@ text-transform: uppercase;
 color: #8a8a86;
 }
 
-.card-body { padding: 18px 20px; }
+/* ── DEPOSITS ── */
+.deposit-list { padding: 0 18px; }
 
-.period-toggle {
+.deposit-item {
 display: flex;
-background: #f4f4f2;
-border: 1px solid #e2e2de;
-border-radius: 6px;
-padding: 3px;
-gap: 2px;
+align-items: center;
+gap: 10px;
+padding: 10px 0;
+border-bottom: 1px solid #f0f0ee;
 }
 
-.toggle-btn {
-background: transparent;
-border: 1px solid transparent;
-font-family: ‘Space Mono’, monospace;
-font-size: 9px;
+.deposit-item:last-child { border-bottom: none; }
+
+.deposit-label {
+flex: 1;
+font-size: 12px;
 font-weight: 700;
-letter-spacing: 0.15em;
 text-transform: uppercase;
+letter-spacing: 0.05em;
+}
+
+.deposit-date {
+font-size: 10px;
 color: #8a8a86;
-padding: 5px 10px;
-border-radius: 4px;
+min-width: 60px;
+text-align: right;
+}
+
+.deposit-amount {
+font-size: 13px;
+font-weight: 700;
+color: #267a2a;
+min-width: 80px;
+text-align: right;
+}
+
+.deposit-del {
+background: none;
+border: none;
+font-size: 15px;
+color: #c8c8c2;
 cursor: pointer;
-transition: all 0.15s;
-}
-
-.toggle-btn.active {
-background: #ffffff;
-color: #1a1a1a;
-border-color: #e2e2de;
-}
-
-.stat-row {
-display: grid;
-grid-template-columns: 1fr 1px 1fr 1px 1fr;
-border-bottom: 1px solid #e2e2de;
-}
-
-.stat-divider { background: #e2e2de; }
-.stat-cell { padding: 20px 18px 16px; }
-
-.stat-label {
-font-size: 9px;
-font-weight: 700;
-letter-spacing: 0.18em;
-text-transform: uppercase;
-color: #8a8a86;
-margin-bottom: 7px;
-}
-
-.stat-val {
-font-size: 20px;
-font-weight: 700;
-letter-spacing: -0.02em;
+padding: 0 2px;
 line-height: 1;
 }
 
-.stat-val.pos { color: #267a2a; }
-.stat-val.neg { color: #c93b2e; }
+.deposit-del:hover { color: #c93b2e; }
 
-.stat-sub {
-font-size: 10px;
-color: #8a8a86;
-margin-top: 4px;
-line-height: 1.4;
-}
-
-.bar-section { padding: 18px 20px; }
-
-.income-bar {
-height: 10px;
-border-radius: 5px;
-overflow: hidden;
+.deposit-add-row {
 display: flex;
-background: #e2e2de;
-margin-bottom: 14px;
+gap: 8px;
+padding: 12px 18px;
+border-top: 1px solid #e2e2de;
+align-items: center;
+flex-wrap: wrap;
 }
 
-.ib-bills { background: #c93b2e; transition: width 0.5s ease; }
-.ib-allow { background: #c87c1a; transition: width 0.5s ease; }
-.ib-left  { background: #267a2a; transition: width 0.5s ease; }
-
-.bar-legend { display: flex; flex-direction: column; gap: 8px; }
-.bar-leg-row { display: flex; align-items: center; gap: 10px; }
-.bl-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
-.bl-name { flex: 1; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #8a8a86; }
-.bl-amt  { font-size: 12px; font-weight: 700; }
-.bl-pct  { font-size: 11px; color: #8a8a86; min-width: 38px; text-align: right; }
-
-.field-row {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 10px;
-margin-bottom: 12px;
-}
-
-.field { margin-bottom: 12px; }
-.field:last-child { margin-bottom: 0; }
-
-.field label {
-display: block;
-font-size: 9px;
-font-weight: 700;
-letter-spacing: 0.18em;
-text-transform: uppercase;
-color: #8a8a86;
-margin-bottom: 5px;
-}
-
-.field input[type=“number”] {
-width: 100%;
+.deposit-add-row input[type=“text”] {
+flex: 1;
+min-width: 80px;
 background: #f4f4f2;
 border: 1px solid #e2e2de;
 border-radius: 6px;
-color: #1a1a1a;
 font-family: ‘Space Mono’, monospace;
-font-size: 14px;
-padding: 9px 12px;
+font-size: 12px;
+color: #1a1a1a;
+padding: 7px 10px;
 outline: none;
-transition: border-color 0.15s;
--webkit-appearance: none;
 }
 
-.field input[type=“number”]:focus { border-color: #1a1a1a; }
+.deposit-add-row input[type=“number”] {
+width: 100px;
+background: #f4f4f2;
+border: 1px solid #e2e2de;
+border-radius: 6px;
+font-family: ‘Space Mono’, monospace;
+font-size: 12px;
+color: #1a1a1a;
+padding: 7px 10px;
+outline: none;
+-webkit-appearance: none;
+text-align: right;
+}
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 
-.computed {
-font-size: 11px;
-color: #8a8a86;
-padding: 8px 12px;
-background: #f4f4f2;
-border: 1px solid #e2e2de;
+.deposit-add-row input:focus { border-color: #1a1a1a; }
+
+.btn-add-deposit {
+background: #1a1a1a;
+border: none;
 border-radius: 6px;
-margin-top: -4px;
-line-height: 1.5;
+font-family: ‘Space Mono’, monospace;
+font-size: 11px;
+font-weight: 700;
+color: #ffffff;
+padding: 7px 14px;
+cursor: pointer;
+white-space: nowrap;
 }
 
-.computed strong { color: #1a1a1a; font-weight: 700; }
-.computed .dot { margin: 0 8px; color: #c8c8c2; }
+/* ── SPENDING ── */
+.spending-grid {
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+gap: 1px;
+background: #e2e2de;
+}
 
-.bills-list { padding: 0 20px; }
+.spending-cell {
+background: #ffffff;
+padding: 14px 16px;
+}
+
+.spending-label {
+font-size: 8px;
+font-weight: 700;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+color: #8a8a86;
+margin-bottom: 6px;
+}
+
+.spending-input {
+width: 100%;
+background: #f4f4f2;
+border: 1px solid #e2e2de;
+border-radius: 5px;
+font-family: ‘Space Mono’, monospace;
+font-size: 14px;
+font-weight: 700;
+color: #1a1a1a;
+padding: 6px 8px;
+outline: none;
+-webkit-appearance: none;
+text-align: right;
+}
+
+.spending-input:focus { border-color: #1a1a1a; }
+
+.spending-sub {
+font-size: 9px;
+color: #8a8a86;
+margin-top: 4px;
+}
+
+/* ── BILLS ── */
+.bills-list { padding: 0 18px; }
 
 .bill-item {
 display: grid;
-grid-template-columns: 1fr auto auto auto auto;
-grid-template-rows: auto 3px;
+grid-template-columns: auto 1fr auto auto auto;
+grid-template-rows: auto 2px;
 gap: 8px;
 align-items: center;
-padding: 11px 0;
-border-bottom: 1px solid #e2e2de;
+padding: 10px 0;
+border-bottom: 1px solid #f0f0ee;
+transition: opacity 0.2s;
 }
 
 .bill-item:last-child { border-bottom: none; }
+.bill-item.paid { opacity: 0.35; }
+
+.paid-btn {
+width: 20px;
+height: 20px;
+border-radius: 50%;
+border: 2px solid #e2e2de;
+background: transparent;
+cursor: pointer;
+flex-shrink: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 11px;
+color: transparent;
+padding: 0;
+transition: all 0.15s;
+}
+
+.paid-btn.checked {
+background: #267a2a;
+border-color: #267a2a;
+color: #ffffff;
+}
 
 .bill-name {
 background: transparent;
 border: none;
 font-family: ‘Space Mono’, monospace;
-font-size: 12px;
+font-size: 11px;
 font-weight: 700;
 color: #1a1a1a;
 outline: none;
 width: 100%;
 text-transform: uppercase;
-letter-spacing: 0.06em;
-padding: 2px 0;
+letter-spacing: 0.05em;
 }
 
-.bill-name::placeholder { color: #b8b8b4; font-weight: 400; }
+.bill-name::placeholder { color: #c8c8c2; font-weight: 400; }
 
 .bill-amt-wrap {
 display: flex;
@@ -285,44 +372,34 @@ align-items: center;
 gap: 2px;
 background: #f4f4f2;
 border: 1px solid #e2e2de;
-border-radius: 6px;
-padding: 5px 9px;
+border-radius: 5px;
+padding: 4px 8px;
 }
 
-.bill-amt-wrap .sym { font-size: 11px; color: #8a8a86; }
+.bill-amt-wrap .sym { font-size: 10px; color: #8a8a86; }
 
 .bill-amt {
 background: transparent;
 border: none;
 font-family: ‘Space Mono’, monospace;
-font-size: 13px;
+font-size: 12px;
 color: #1a1a1a;
 outline: none;
-width: 70px;
+width: 68px;
 text-align: right;
 -webkit-appearance: none;
 }
 
-.bill-pct {
-font-size: 10px;
-font-weight: 700;
-min-width: 40px;
-text-align: right;
-color: #8a8a86;
-letter-spacing: 0.05em;
-}
-
 .tag-btn {
 font-family: ‘Space Mono’, monospace;
-font-size: 8px;
+font-size: 7px;
 font-weight: 700;
-letter-spacing: 0.12em;
+letter-spacing: 0.1em;
 text-transform: uppercase;
 border-radius: 20px;
-padding: 3px 8px;
+padding: 3px 7px;
 border: 1px solid #e2e2de;
 cursor: pointer;
-transition: all 0.15s;
 white-space: nowrap;
 background: #f4f4f2;
 color: #8a8a86;
@@ -331,60 +408,69 @@ color: #8a8a86;
 .tag-btn.need { background: #e8f0fb; border-color: #a8c0ee; color: #2450a0; }
 .tag-btn.want { background: #fef3e2; border-color: #f0c878; color: #8a5000; }
 
-.bills-tally {
-border-top: 1px solid #e2e2de;
-border-bottom: 1px solid #e2e2de;
-padding: 10px 20px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-}
-
-.tally-label {
-font-size: 8px;
-font-weight: 700;
-letter-spacing: 0.16em;
-text-transform: uppercase;
-color: #8a8a86;
-}
-
-.tally-amounts { display: flex; gap: 16px; align-items: center; }
-.tally-chunk { text-align: right; }
-.tally-chunk-label { font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: #8a8a86; }
-.tally-chunk-val { font-size: 13px; font-weight: 700; }
-.tally-chunk-val.need { color: #2450a0; }
-.tally-chunk-val.want { color: #8a5000; }
-.tally-total { font-size: 15px; font-weight: 700; color: #1a1a1a; }
-.tally-divider { width: 1px; height: 28px; background: #e2e2de; }
-
-.bill-bar { grid-column: 1 / -1; height: 3px; background: #e2e2de; border-radius: 1px; }
-
-.bill-bar-fill {
-height: 100%;
-background: #b8b8b4;
-border-radius: 1px;
-transition: width 0.4s ease, background 0.2s ease;
-}
-
-.bill-bar-fill.need { background: #5b8ee8; }
-.bill-bar-fill.want { background: #c87c1a; }
-
 .btn-del {
 background: none;
 border: none;
-font-family: ‘Space Mono’, monospace;
-font-size: 16px;
-color: #b8b8b4;
+font-size: 15px;
+color: #c8c8c2;
 cursor: pointer;
-padding: 2px 4px;
-transition: color 0.15s;
+padding: 0 2px;
 line-height: 1;
-border-radius: 4px;
 }
 
 .btn-del:hover { color: #c93b2e; }
 
-.bills-footer { padding: 12px 20px; border-top: 1px solid #e2e2de; }
+.bill-bar { grid-column: 1 / -1; height: 2px; background: #f0f0ee; border-radius: 1px; }
+.bill-bar-fill { height: 100%; border-radius: 1px; transition: width 0.3s ease; background: #c8c8c2; }
+.bill-bar-fill.need { background: #5b8ee8; }
+.bill-bar-fill.want { background: #c87c1a; }
+.bill-bar-fill.paid-bar { background: #267a2a; }
+
+.section-label {
+font-size: 8px;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: #c8c8c2;
+padding: 10px 0 2px;
+}
+
+.bills-tally {
+border-top: 1px solid #e2e2de;
+padding: 12px 18px;
+display: flex;
+flex-direction: column;
+gap: 7px;
+}
+
+.tally-row {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.tally-row-label {
+font-size: 9px;
+font-weight: 700;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: #8a8a86;
+display: flex;
+align-items: center;
+gap: 6px;
+}
+
+.tally-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.tally-val { font-size: 13px; font-weight: 700; }
+.tally-val.green { color: #267a2a; }
+.tally-val.red   { color: #c93b2e; }
+.tally-val.dark  { color: #1a1a1a; font-size: 15px; }
+.tally-divider-line { height: 1px; background: #e2e2de; margin: 2px 0; }
+
+.bills-footer {
+padding: 10px 18px;
+border-top: 1px solid #e2e2de;
+}
 
 .btn-add {
 width: 100%;
@@ -394,42 +480,66 @@ border-radius: 6px;
 font-family: ‘Space Mono’, monospace;
 font-size: 10px;
 font-weight: 700;
-letter-spacing: 0.12em;
+letter-spacing: 0.1em;
 text-transform: uppercase;
 color: #8a8a86;
-padding: 9px 10px;
+padding: 8px;
 cursor: pointer;
-transition: all 0.15s;
 }
 
 .btn-add:hover { border-color: #1a1a1a; color: #1a1a1a; }
 
+/* ── PROGRESS BAR ── */
+.progress-wrap {
+padding: 16px 18px;
+border-top: 1px solid #e2e2de;
+}
+
+.progress-label {
+display: flex;
+justify-content: space-between;
+margin-bottom: 8px;
+font-size: 9px;
+font-weight: 700;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: #8a8a86;
+}
+
+.progress-bar {
+height: 8px;
+background: #f0f0ee;
+border-radius: 4px;
+overflow: hidden;
+}
+
+.progress-fill {
+height: 100%;
+border-radius: 4px;
+transition: width 0.5s ease;
+background: #267a2a;
+}
+
+.progress-fill.warning { background: #c87c1a; }
+.progress-fill.danger  { background: #c93b2e; }
+
 @media (max-width: 480px) {
-.stat-row { grid-template-columns: 1fr 1fr; }
-.stat-divider { display: none; }
-.stat-cell { padding: 14px 16px 12px; border-bottom: 1px solid #e2e2de; }
-.stat-cell:nth-child(1) { border-right: 1px solid #e2e2de; }
-.stat-cell:nth-child(3) { border-right: 1px solid #e2e2de; }
-.stat-cell:nth-child(5) { grid-column: 1 / -1; border-bottom: none; }
-.stat-val { font-size: 18px; }
-.site-header { padding: 12px 16px; }
-.date-input { width: 120px; font-size: 9px; }
-.btn-pdf { font-size: 9px; padding: 5px 10px; }
-.card-body { padding: 14px 16px; }
-.bills-list { padding: 0 14px; }
-.bills-footer { padding: 10px 14px; }
-.bills-tally { padding: 10px 14px; }
-.bar-section { padding: 14px 16px; }
+.site-header { padding: 12px 14px; }
+.balance-amount { font-size: 38px; }
+.balance-grid { grid-template-columns: 1fr 1fr 1fr; }
+.balance-cell { padding: 10px 10px; }
+.balance-cell-val { font-size: 12px; }
+.spending-grid { grid-template-columns: 1fr 1fr 1fr; }
+.deposit-add-row { gap: 6px; }
+.deposit-add-row input[type=“text”] { min-width: 60px; }
+.deposit-add-row input[type=“number”] { width: 85px; }
 }
 
 @media print {
-@page { margin: 18mm 16mm; size: A4; }
+@page { margin: 15mm; size: A4; }
 body { background: #fff !important; padding-bottom: 0; }
-.btn-pdf, .period-toggle, .btn-add, .btn-del { display: none !important; }
-.main { padding: 16px 0; gap: 10px; }
-.card { break-inside: avoid; border: 1px solid #ccc !important; }
-.stat-val.pos { color: #267a2a !important; }
-.stat-val.neg { color: #c93b2e !important; }
+.btn-reset, .btn-pdf, .btn-add, .btn-del, .paid-btn, .deposit-add-row, .bills-footer { display: none !important; }
+.balance-hero { background: #1a1a1a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 </style>
 
@@ -439,244 +549,286 @@ body { background: #fff !important; padding-bottom: 0; }
 <header class="site-header">
   <div class="site-title">Budget OS</div>
   <div class="header-right">
-    <input type="date" class="date-input" id="budget-date" oninput="updateDateBadge()">
-    <button class="btn-pdf" onclick="window.print()">&#8595; Save PDF</button>
+    <button class="btn-reset" onclick="resetAll()">New Month</button>
+    <button class="btn-pdf" onclick="window.print()">&#8595; PDF</button>
   </div>
 </header>
 
 <div class="main">
 
-  <div class="card">
-    <div class="card-header">
-      <span class="card-title">Overview &#8212; <span id="date-label">&#8212;</span></span>
-      <div class="period-toggle">
-        <button class="toggle-btn active" id="btn-weekly" onclick="setPeriod('weekly')">Weekly</button>
-        <button class="toggle-btn" id="btn-monthly" onclick="setPeriod('monthly')">Monthly</button>
+  <!-- BALANCE HERO -->
+
+  <div class="balance-hero">
+    <div class="balance-period" id="hero-period">May 2026</div>
+    <div class="balance-amount positive" id="hero-balance">$0.00</div>
+    <div class="balance-sub" id="hero-sub">after bills paid &amp; spending</div>
+    <div class="balance-grid">
+      <div class="balance-cell">
+        <div class="balance-cell-label">Deposited</div>
+        <div class="balance-cell-val green" id="hero-deposited">$0</div>
       </div>
-    </div>
-    <div class="stat-row">
-      <div class="stat-cell">
-        <div class="stat-label">Income</div>
-        <div class="stat-val" id="ov-income">$0</div>
-        <div class="stat-sub" id="ov-income-sub">&#8212;</div>
+      <div class="balance-cell">
+        <div class="balance-cell-label">Bills Left</div>
+        <div class="balance-cell-val red" id="hero-bills-left">$0</div>
       </div>
-      <div class="stat-divider"></div>
-      <div class="stat-cell">
-        <div class="stat-label">Bills + Spending</div>
-        <div class="stat-val" id="ov-out">$0</div>
-        <div class="stat-sub" id="ov-out-pct">&#8212;</div>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-cell">
-        <div class="stat-label">Left Over</div>
-        <div class="stat-val" id="ov-left">$0</div>
-        <div class="stat-sub" id="ov-left-pct">&#8212;</div>
-      </div>
-    </div>
-    <div class="bar-section">
-      <div class="income-bar">
-        <div class="ib-bills" id="bar-bills" style="width:0%"></div>
-        <div class="ib-allow" id="bar-allow" style="width:0%"></div>
-        <div class="ib-left"  id="bar-left"  style="width:0%"></div>
-      </div>
-      <div class="bar-legend">
-        <div class="bar-leg-row">
-          <div class="bl-dot" style="background:#c93b2e"></div>
-          <span class="bl-name">Bills</span>
-          <span class="bl-amt" id="leg-bills">$0</span>
-          <span class="bl-pct" id="legpct-bills">0%</span>
-        </div>
-        <div class="bar-leg-row">
-          <div class="bl-dot" style="background:#c87c1a"></div>
-          <span class="bl-name">Spending</span>
-          <span class="bl-amt" id="leg-allow">$0</span>
-          <span class="bl-pct" id="legpct-allow">0%</span>
-        </div>
-        <div class="bar-leg-row">
-          <div class="bl-dot" style="background:#267a2a"></div>
-          <span class="bl-name">Left Over</span>
-          <span class="bl-amt" id="leg-left">$0</span>
-          <span class="bl-pct" id="legpct-left">0%</span>
-        </div>
+      <div class="balance-cell">
+        <div class="balance-cell-label">Spending</div>
+        <div class="balance-cell-val gold" id="hero-spending">$0</div>
       </div>
     </div>
   </div>
 
+  <!-- DEPOSITS -->
+
   <div class="card">
     <div class="card-header">
-      <span class="card-title">Income</span>
+      <span class="card-title">Deposits This Period</span>
+      <span style="font-size:11px;font-weight:700;color:#267a2a" id="deposit-total">$0.00</span>
     </div>
-    <div class="card-body">
-      <div class="field-row">
-        <div class="field">
-          <label>Weekly Paycheck</label>
-          <input type="number" id="weekly" value="2097.44" oninput="recalc()">
-        </div>
-        <div class="field">
-          <label>Other Monthly</label>
-          <input type="number" id="other" value="0" placeholder="0.00" oninput="recalc()">
-        </div>
+    <div class="deposit-list" id="deposit-list">
+      <div style="padding:16px 0;font-size:11px;color:#8a8a86;text-align:center">No deposits yet &#8212; add your first paycheck below</div>
+    </div>
+    <div class="deposit-add-row">
+      <input type="text" id="dep-label" placeholder="Description" value="PAYROLL">
+      <input type="number" id="dep-amount" placeholder="0.00">
+      <button class="btn-add-deposit" onclick="addDeposit()">+ Add</button>
+    </div>
+  </div>
+
+  <!-- SPENDING -->
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Weekly Spending Money</span>
+      <span style="font-size:10px;color:#8a8a86" id="spend-total-label">$0 / week</span>
+    </div>
+    <div class="spending-grid">
+      <div class="spending-cell">
+        <div class="spending-label">Cody</div>
+        <input type="number" class="spending-input" id="sp-cody" value="300" oninput="recalc()">
+        <div class="spending-sub">/week</div>
       </div>
-      <div class="computed">
-        Monthly <strong id="payroll-monthly">$0</strong>
-        <span class="dot">&#183;</span>
-        Annual <strong id="payroll-annual">$0</strong>
+      <div class="spending-cell">
+        <div class="spending-label">Katie</div>
+        <input type="number" class="spending-input" id="sp-katie" value="300" oninput="recalc()">
+        <div class="spending-sub">/week</div>
+      </div>
+      <div class="spending-cell">
+        <div class="spending-label">Hailey</div>
+        <input type="number" class="spending-input" id="sp-kid" value="50" oninput="recalc()">
+        <div class="spending-sub">/week</div>
       </div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-header">
-      <span class="card-title">Spending &#8212; Weekly</span>
-    </div>
-    <div class="card-body">
-      <div class="field-row">
-        <div class="field">
-          <label>Cody / Week</label>
-          <input type="number" id="allow-cody" value="300" oninput="recalc()">
-        </div>
-        <div class="field">
-          <label>Katie / Week</label>
-          <input type="number" id="allow-katie" value="300" oninput="recalc()">
-        </div>
-      </div>
-      <div class="field" style="max-width:48%">
-        <label>Hailey / Week</label>
-        <input type="number" id="allow-kid" value="50" oninput="recalc()">
-      </div>
-      <div class="computed" style="margin-top:12px">
-        Monthly total <strong id="allow-total-monthly">$0</strong>
-        <span class="dot">&#183;</span>
-        <strong id="allow-pct">0%</strong> of income
-      </div>
-    </div>
-  </div>
+  <!-- BILLS -->
 
   <div class="card">
     <div class="card-header">
       <span class="card-title">Monthly Bills</span>
+      <span style="font-size:10px;color:#8a8a86" id="bills-progress-label">0 of 0 paid</span>
     </div>
     <div class="bills-list" id="bills-list"></div>
-    <div class="bills-tally">
-      <div class="tally-label">Bills Total</div>
-      <div class="tally-amounts">
-        <div class="tally-chunk">
-          <div class="tally-chunk-label">Needs</div>
-          <div class="tally-chunk-val need" id="tally-needs">$0</div>
-        </div>
-        <div class="tally-divider"></div>
-        <div class="tally-chunk">
-          <div class="tally-chunk-label">Wants</div>
-          <div class="tally-chunk-val want" id="tally-wants">$0</div>
-        </div>
-        <div class="tally-divider"></div>
-        <div class="tally-total" id="tally-total">$0</div>
-      </div>
-    </div>
-    <div class="bills-footer">
-      <button class="btn-add" onclick="addBill()">+ Add Bill</button>
-    </div>
+
+```
+<!-- Bill payment progress bar -->
+<div class="progress-wrap">
+  <div class="progress-label">
+    <span>Bills Paid</span>
+    <span id="progress-pct">0%</span>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+  </div>
+</div>
+
+<div class="bills-tally" id="bills-tally"></div>
+<div class="bills-footer">
+  <button class="btn-add" onclick="addBill()">+ Add Bill</button>
+</div>
+```
+
   </div>
 
 </div>
 
 <script>
-var defaultBills = [
-  { name: 'MORTGAGE',        amt: 2104.84, tag: 'need' },
-  { name: 'LIBERTY MUTUAL',  amt: 457.21,  tag: 'need' },
-  { name: 'CSU UTILITIES',   amt: 259.00,  tag: 'need' },
-  { name: 'RAV4 PAYMENT',    amt: 303.08,  tag: 'need' },
-  { name: 'T-MOBILE',        amt: 175.25,  tag: 'need' },
-  { name: 'METRONET',        amt: 72.90,   tag: 'need' },
-  { name: 'QUICK QUACK',     amt: 61.99,   tag: 'want' },
-  { name: 'YOUTUBE PREMIUM', amt: 25.08,   tag: 'want' },
-  { name: 'HBO/HULU/DISNEY', amt: 34.69,   tag: 'want' },
-  { name: 'KATIE GAS',       amt: 100.00,  tag: 'need' }
+var deposits = [];
+
+var bills = [
+  { name: 'MORTGAGE',        amt: 2104.84, tag: 'need', paid: false },
+  { name: 'LIBERTY MUTUAL',  amt: 457.21,  tag: 'need', paid: false },
+  { name: 'CSU UTILITIES',   amt: 259.00,  tag: 'need', paid: false },
+  { name: 'RAV4 PAYMENT',    amt: 303.08,  tag: 'need', paid: false },
+  { name: 'T-MOBILE',        amt: 175.25,  tag: 'need', paid: false },
+  { name: 'METRONET',        amt: 72.90,   tag: 'need', paid: false },
+  { name: 'KATIE GAS',       amt: 100.00,  tag: 'need', paid: false },
+  { name: 'QUICK QUACK',     amt: 61.99,   tag: 'want', paid: false },
+  { name: 'YOUTUBE PREMIUM', amt: 25.08,   tag: 'want', paid: false },
+  { name: 'HBO/HULU/DISNEY', amt: 34.69,   tag: 'want', paid: false }
 ];
-
-var bills = defaultBills.map(function(b) { return { name: b.name, amt: b.amt, tag: b.tag }; });
-var period = 'weekly';
-
-function todayValue() {
-  var d = new Date();
-  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-}
-
-function updateDateBadge() {
-  var val = document.getElementById('budget-date').value;
-  var lbl = document.getElementById('date-label');
-  if (!val) { lbl.textContent = '-'; return; }
-  var parts = val.split('-').map(Number);
-  lbl.textContent = new Date(parts[0], parts[1]-1, parts[2]).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-}
-
-function setPeriod(p) {
-  period = p;
-  document.getElementById('btn-weekly').classList.toggle('active', p === 'weekly');
-  document.getElementById('btn-monthly').classList.toggle('active', p === 'monthly');
-  recalc();
-}
 
 function fmt(n) {
   var neg = n < 0;
   return (neg ? '-$' : '$') + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
-function getMonthly() {
-  return (parseFloat(document.getElementById('weekly').value) || 0) * 4.33
-       + (parseFloat(document.getElementById('other').value)  || 0);
+function getDeposited() {
+  return deposits.reduce(function(s, d) { return s + d.amt; }, 0);
 }
 
-function getAllow() {
-  return ((parseFloat(document.getElementById('allow-cody').value)  || 0)
-        + (parseFloat(document.getElementById('allow-katie').value) || 0)
-        + (parseFloat(document.getElementById('allow-kid').value)   || 0)) * 4.33;
+function getBillTotals() {
+  var paid = 0, unpaid = 0;
+  bills.forEach(function(b) {
+    if (b.paid) paid += b.amt;
+    else unpaid += b.amt;
+  });
+  return { paid: paid, unpaid: unpaid, total: paid + unpaid };
 }
 
-function getBills() {
-  return bills.reduce(function(s, b) { return s + (parseFloat(b.amt) || 0); }, 0);
+function getWeeklySpend() {
+  return (parseFloat(document.getElementById('sp-cody').value)  || 0)
+       + (parseFloat(document.getElementById('sp-katie').value) || 0)
+       + (parseFloat(document.getElementById('sp-kid').value)   || 0);
+}
+
+function currentMonth() {
+  var d = new Date();
+  return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+}
+
+function addDeposit() {
+  var label  = document.getElementById('dep-label').value.trim() || 'DEPOSIT';
+  var amount = parseFloat(document.getElementById('dep-amount').value) || 0;
+  if (amount <= 0) return;
+  var now = new Date();
+  var dateStr = (now.getMonth()+1) + '/' + now.getDate();
+  deposits.push({ label: label.toUpperCase(), amt: amount, date: dateStr });
+  document.getElementById('dep-amount').value = '';
+  document.getElementById('dep-label').value = 'PAYROLL';
+  renderDeposits();
+  recalc();
+}
+
+function removeDeposit(i) {
+  deposits.splice(i, 1);
+  renderDeposits();
+  recalc();
+}
+
+function renderDeposits() {
+  var container = document.getElementById('deposit-list');
+  if (deposits.length === 0) {
+    container.innerHTML = '<div style="padding:16px 0;font-size:11px;color:#8a8a86;text-align:center">No deposits yet &#8212; add your first paycheck below</div>';
+    return;
+  }
+  container.innerHTML = '';
+  deposits.forEach(function(d, i) {
+    var div = document.createElement('div');
+    div.className = 'deposit-item';
+    div.innerHTML =
+      '<div class="deposit-label">' + d.label + '</div>' +
+      '<div class="deposit-date">' + d.date + '</div>' +
+      '<div class="deposit-amount">+' + fmt(d.amt) + '</div>' +
+      '<button class="deposit-del" onclick="removeDeposit(' + i + ')">x</button>';
+    container.appendChild(div);
+  });
+}
+
+function togglePaid(i) {
+  bills[i].paid = !bills[i].paid;
+  renderBills();
+  recalc();
 }
 
 function cycleTag(i) {
   var t = bills[i].tag;
   bills[i].tag = t === 'none' ? 'need' : t === 'need' ? 'want' : 'none';
   renderBills();
+  recalc();
+}
+
+function getSortedBills() {
+  var needs = [], wants = [], none = [];
+  bills.forEach(function(b, i) {
+    var obj = { bill: b, idx: i };
+    if (b.tag === 'want') wants.push(obj);
+    else if (b.tag === 'need') needs.push(obj);
+    else none.push(obj);
+  });
+  function sortGroup(arr) {
+    return arr.sort(function(a, b) { return (a.bill.paid ? 1 : 0) - (b.bill.paid ? 1 : 0); });
+  }
+  return sortGroup(needs).concat(sortGroup(none)).concat(sortGroup(wants));
 }
 
 function renderBills() {
-  var monthly   = getMonthly();
+  var bt = getBillTotals();
   var container = document.getElementById('bills-list');
+  var tally = document.getElementById('bills-tally');
   container.innerHTML = '';
-  var needTotal = 0, wantTotal = 0;
 
-  bills.forEach(function(bill, i) {
-    var pct      = monthly > 0 ? (bill.amt / monthly) * 100 : 0;
+  var sorted = getSortedBills();
+  var wantStarted = false;
+
+  sorted.forEach(function(obj) {
+    var bill = obj.bill;
+    var i    = obj.idx;
+
+    if (bill.tag === 'want' && !wantStarted) {
+      wantStarted = true;
+      var lbl = document.createElement('div');
+      lbl.className = 'section-label';
+      lbl.textContent = 'Wants';
+      container.appendChild(lbl);
+    }
+
+    var pct      = bt.total > 0 ? (bill.amt / bt.total) * 100 : 0;
     var tag      = bill.tag || 'none';
-    var barClass = tag !== 'none' ? tag : '';
     var tagLabel = tag === 'need' ? 'Need' : tag === 'want' ? 'Want' : '-';
-
-    if (tag === 'need') needTotal += bill.amt;
-    else if (tag === 'want') wantTotal += bill.amt;
+    var barClass = bill.paid ? 'paid-bar' : (tag !== 'none' ? tag : '');
 
     var div = document.createElement('div');
-    div.className = 'bill-item';
+    div.className = 'bill-item' + (bill.paid ? ' paid' : '');
     div.innerHTML =
+      '<button class="paid-btn ' + (bill.paid ? 'checked' : '') + '" onclick="togglePaid(' + i + ')">' + (bill.paid ? '&#10003;' : '') + '</button>' +
       '<input class="bill-name" type="text" value="' + bill.name + '" placeholder="BILL NAME" onchange="bills[' + i + '].name = this.value">' +
-      '<div class="bill-amt-wrap"><span class="sym">$</span><input class="bill-amt" type="number" value="' + bill.amt + '" oninput="bills[' + i + '].amt = parseFloat(this.value) || 0; recalc()"></div>' +
-      '<span class="bill-pct">' + pct.toFixed(1) + '%</span>' +
+      '<div class="bill-amt-wrap"><span class="sym">$</span><input class="bill-amt" type="number" value="' + bill.amt + '" oninput="bills[' + i + '].amt = parseFloat(this.value)||0; recalc()"></div>' +
       '<button class="tag-btn ' + (tag !== 'none' ? tag : '') + '" onclick="cycleTag(' + i + ')">' + tagLabel + '</button>' +
-      '<button class="btn-del" onclick="removeBill(' + i + ')" title="Remove">x</button>' +
-      '<div class="bill-bar"><div class="bill-bar-fill ' + barClass + '" style="width:' + Math.min(100, pct * 4) + '%"></div></div>';
+      '<button class="btn-del" onclick="removeBill(' + i + ')">x</button>' +
+      '<div class="bill-bar"><div class="bill-bar-fill ' + barClass + '" style="width:' + Math.min(100, pct * 1.5) + '%"></div></div>';
     container.appendChild(div);
   });
 
-  document.getElementById('tally-needs').textContent = fmt(needTotal);
-  document.getElementById('tally-wants').textContent = fmt(wantTotal);
-  document.getElementById('tally-total').textContent = fmt(needTotal + wantTotal);
+  // Progress bar
+  var paidCount = bills.filter(function(b) { return b.paid; }).length;
+  var paidPct   = bills.length > 0 ? (bt.paid / bt.total) * 100 : 0;
+  document.getElementById('bills-progress-label').textContent = paidCount + ' of ' + bills.length + ' paid';
+  document.getElementById('progress-pct').textContent = paidPct.toFixed(0) + '%';
+  var fill = document.getElementById('progress-fill');
+  fill.style.width = paidPct + '%';
+  fill.className = 'progress-fill' + (paidPct >= 100 ? '' : paidPct >= 60 ? ' warning' : '');
+  if (paidPct >= 100) fill.className = 'progress-fill';
+
+  // Tally
+  tally.innerHTML =
+    '<div class="tally-row">' +
+      '<div class="tally-row-label"><div class="tally-dot" style="background:#267a2a"></div>Paid</div>' +
+      '<div class="tally-val green">' + fmt(bt.paid) + '</div>' +
+    '</div>' +
+    '<div class="tally-row">' +
+      '<div class="tally-row-label"><div class="tally-dot" style="background:#c93b2e"></div>Remaining</div>' +
+      '<div class="tally-val red">' + fmt(bt.unpaid) + '</div>' +
+    '</div>' +
+    '<div class="tally-divider-line"></div>' +
+    '<div class="tally-row">' +
+      '<div class="tally-row-label">Total Bills</div>' +
+      '<div class="tally-val dark">' + fmt(bt.total) + '</div>' +
+    '</div>';
 }
 
 function addBill() {
-  bills.push({ name: '', amt: 0, tag: 'none' });
+  bills.push({ name: '', amt: 0, tag: 'none', paid: false });
   renderBills();
   recalc();
   setTimeout(function() {
@@ -691,50 +843,44 @@ function removeBill(i) {
   recalc();
 }
 
+function resetAll() {
+  if (!confirm('Start a new month? This will clear all deposits and mark all bills unpaid.')) return;
+  deposits = [];
+  bills.forEach(function(b) { b.paid = false; });
+  renderDeposits();
+  renderBills();
+  recalc();
+}
+
 function recalc() {
-  var monthly    = getMonthly();
-  var allow      = getAllow();
-  var totalBills = getBills();
-  var leftover   = monthly - totalBills - allow;
-  var weekly     = parseFloat(document.getElementById('weekly').value) || 0;
+  var deposited   = getDeposited();
+  var bt          = getBillTotals();
+  var weeklySpend = getWeeklySpend();
+  var balance     = deposited - bt.unpaid - weeklySpend;
 
-  var pBills = monthly > 0 ? (totalBills / monthly) * 100 : 0;
-  var pAllow = monthly > 0 ? (allow      / monthly) * 100 : 0;
-  var pLeft  = monthly > 0 ? Math.max(0, (leftover / monthly) * 100) : 0;
+  // Hero
+  document.getElementById('hero-period').textContent = currentMonth();
+  var heroEl = document.getElementById('hero-balance');
+  heroEl.textContent = fmt(balance);
+  heroEl.className = 'balance-amount ' + (balance >= 0 ? 'positive' : 'negative');
+  document.getElementById('hero-sub').textContent = balance >= 0
+    ? 'available after bills and spending'
+    : 'short — more deposits needed';
+  document.getElementById('hero-deposited').textContent  = fmt(deposited);
+  document.getElementById('hero-bills-left').textContent = fmt(bt.unpaid);
+  document.getElementById('hero-spending').textContent   = fmt(weeklySpend);
 
-  var div = period === 'weekly' ? 4.33 : 1;
+  // Deposit total
+  document.getElementById('deposit-total').textContent = fmt(deposited);
 
-  document.getElementById('ov-income').textContent     = fmt(monthly / div);
-  document.getElementById('ov-income-sub').textContent = period === 'weekly' ? fmt(monthly) + ' /mo' : fmt(weekly) + ' /wk';
-  document.getElementById('ov-out').textContent        = fmt((totalBills + allow) / div);
-  document.getElementById('ov-out-pct').textContent    = (pBills + pAllow).toFixed(1) + '% of income';
-
-  var leftEl = document.getElementById('ov-left');
-  leftEl.textContent = fmt(leftover / div);
-  leftEl.className   = 'stat-val ' + (leftover >= 0 ? 'pos' : 'neg');
-  document.getElementById('ov-left-pct').textContent = pLeft.toFixed(1) + '% of income' + (leftover < 0 ? ' - over!' : '');
-
-  document.getElementById('bar-bills').style.width = Math.min(100, pBills) + '%';
-  document.getElementById('bar-allow').style.width = Math.min(100 - Math.min(100, pBills), pAllow) + '%';
-  document.getElementById('bar-left').style.width  = Math.min(100 - Math.min(100, pBills) - Math.min(100 - Math.min(100, pBills), pAllow), pLeft) + '%';
-
-  document.getElementById('leg-bills').textContent    = fmt(totalBills / div);
-  document.getElementById('legpct-bills').textContent = pBills.toFixed(1) + '%';
-  document.getElementById('leg-allow').textContent    = fmt(allow / div);
-  document.getElementById('legpct-allow').textContent = pAllow.toFixed(1) + '%';
-  document.getElementById('leg-left').textContent     = fmt(Math.max(0, leftover) / div);
-  document.getElementById('legpct-left').textContent  = pLeft.toFixed(1) + '%';
-
-  document.getElementById('payroll-monthly').textContent     = fmt(weekly * 4.33);
-  document.getElementById('payroll-annual').textContent      = fmt(monthly * 12);
-  document.getElementById('allow-total-monthly').textContent = fmt(allow);
-  document.getElementById('allow-pct').textContent          = pAllow.toFixed(1) + '%';
+  // Spending label
+  document.getElementById('spend-total-label').textContent = fmt(weeklySpend) + ' / week';
 
   renderBills();
 }
 
-document.getElementById('budget-date').value = todayValue();
-updateDateBadge();
+// Init
+renderDeposits();
 renderBills();
 recalc();
 </script>
