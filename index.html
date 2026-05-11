@@ -56,17 +56,19 @@ border-radius: 20px; padding: 5px 12px; cursor: pointer;
 
 /* 50/30/20 */
 .breakdown-title { font-size: 8px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #666660; margin-bottom: 10px; }
-.bd-row { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+.bd-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
 .bd-label { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #999990; width: 48px; flex-shrink: 0; }
-.bd-bar-wrap { flex: 1; height: 6px; background: #2e2e2e; border-radius: 3px; overflow: hidden; }
-.bd-bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
-.bd-bar-needs { background: #5b8ee8; }
-.bd-bar-wants { background: #c87c1a; }
-.bd-bar-saves { background: #7bbf90; }
-.bd-nums { font-size: 9px; font-weight: 700; text-align: right; width: 95px; flex-shrink: 0; }
+.bd-bar-wrap { flex: 1; height: 10px; background: #2e2e2e; border-radius: 5px; overflow: hidden; position: relative; }
+.bd-bar-projected { position: absolute; top: 0; left: 0; height: 100%; border-radius: 5px; opacity: 0.25; transition: width 0.5s; }
+.bd-bar-actual { position: absolute; top: 0; left: 0; height: 100%; border-radius: 5px; transition: width 0.5s; }
+.bd-bar-needs-color { background: #5b8ee8; }
+.bd-bar-wants-color { background: #c87c1a; }
+.bd-bar-saves-color { background: #7bbf90; }
+.bd-nums { font-size: 9px; font-weight: 700; text-align: right; width: 110px; flex-shrink: 0; line-height: 1.4; }
 .bd-nums.ok   { color: #7bbf90; }
 .bd-nums.over { color: #f08070; }
 .bd-nums.warn { color: #c8a84c; }
+.bd-nums-proj { font-size: 8px; color: #666660; }
 
 /* CARD */
 .card { background: #ffffff; border: 1px solid #e2e2de; border-radius: 10px; overflow: hidden; }
@@ -248,20 +250,29 @@ body { background: #fff !important; padding-bottom: 0; }
         <div class="hero-cell-val hcv-gold" id="hero-savings">$0.00</div>
       </div>
     </div>
-    <div class="breakdown-title">50 / 30 / 20 Guide (monthly)</div>
+    <div class="breakdown-title">50 / 30 / 20 — Projected vs Actual</div>
     <div class="bd-row">
       <div class="bd-label">Needs</div>
-      <div class="bd-bar-wrap"><div class="bd-bar-fill bd-bar-needs" id="bd-needs-bar" style="width:0%"></div></div>
+      <div class="bd-bar-wrap">
+        <div class="bd-bar-projected bd-bar-needs-color" id="bd-needs-proj" style="width:0%"></div>
+        <div class="bd-bar-actual bd-bar-needs-color" id="bd-needs-actual" style="width:0%"></div>
+      </div>
       <div class="bd-nums" id="bd-needs-nums">$0</div>
     </div>
     <div class="bd-row">
       <div class="bd-label">Wants</div>
-      <div class="bd-bar-wrap"><div class="bd-bar-fill bd-bar-wants" id="bd-wants-bar" style="width:0%"></div></div>
+      <div class="bd-bar-wrap">
+        <div class="bd-bar-projected bd-bar-wants-color" id="bd-wants-proj" style="width:0%"></div>
+        <div class="bd-bar-actual bd-bar-wants-color" id="bd-wants-actual" style="width:0%"></div>
+      </div>
       <div class="bd-nums" id="bd-wants-nums">$0</div>
     </div>
     <div class="bd-row">
       <div class="bd-label">Savings</div>
-      <div class="bd-bar-wrap"><div class="bd-bar-fill bd-bar-saves" id="bd-saves-bar" style="width:0%"></div></div>
+      <div class="bd-bar-wrap">
+        <div class="bd-bar-projected bd-bar-saves-color" id="bd-saves-proj" style="width:0%"></div>
+        <div class="bd-bar-actual bd-bar-saves-color" id="bd-saves-actual" style="width:0%"></div>
+      </div>
       <div class="bd-nums" id="bd-saves-nums">$0</div>
     </div>
   </div>
@@ -461,6 +472,7 @@ function currentMonth() {
 }
 
 function quickPayroll(label, amt) {
+  if (!confirm('Add ' + label + ' (' + fmt(amt) + ')?')) return;
   var dateVal = document.getElementById('dep-date').value || todayStr();
   deposits.push({ label: label, amt: amt, dateRaw: dateVal, dateDisp: fmtDateStr(dateVal) });
   renderDeposits();
@@ -684,28 +696,54 @@ function recalc() {
   document.getElementById('hero-savings').textContent  = fmt(savings);
   document.getElementById('dep-total').textContent     = fmt(deposited);
 
-  var needsTotal   = bt.needs;
-  var wantsTotal   = bt.wants + ALLOWANCES_MONTHLY;
-  var savingsTotal = Math.max(0, MONTHLY_INCOME - needsTotal - wantsTotal);
-  var needsPct = MONTHLY_INCOME > 0 ? (needsTotal  / MONTHLY_INCOME * 100) : 0;
-  var wantsPct = MONTHLY_INCOME > 0 ? (wantsTotal  / MONTHLY_INCOME * 100) : 0;
-  var savesPct = MONTHLY_INCOME > 0 ? (savingsTotal / MONTHLY_INCOME * 100) : 0;
+  // 50/30/20 — Projected vs Actual
+  var base = deposited > 0 ? deposited : MONTHLY_INCOME;
 
-  document.getElementById('bd-needs-bar').style.width = Math.min(100, needsPct) + '%';
-  document.getElementById('bd-wants-bar').style.width = Math.min(100, wantsPct) + '%';
-  document.getElementById('bd-saves-bar').style.width = Math.min(100, savesPct) + '%';
+  // Projected — what each category should be based on full monthly income
+  var projNeeds = bt.needs;
+  var projWants = bt.wants + ALLOWANCES_MONTHLY;
+  var projSaves = Math.max(0, MONTHLY_INCOME - projNeeds - projWants);
+
+  // Actual — what's been paid so far this period
+  var actualNeeds = 0, actualWants = 0;
+  bills.forEach(function(b) {
+    if (b.paid) {
+      var mo = monthlyAmt(b);
+      if (b.tag === 'need') actualNeeds += mo;
+      else if (b.tag === 'want') actualWants += mo;
+    }
+  });
+  actualWants += ALLOWANCES_MONTHLY; // allowances always count
+  var actualSaves = Math.max(0, deposited - actualNeeds - actualWants);
+
+  // Use monthly income as 100% baseline for bar widths
+  var baseline = MONTHLY_INCOME;
+
+  var projNeedsPct  = Math.min(100, projNeeds  / baseline * 100);
+  var projWantsPct  = Math.min(100, projWants  / baseline * 100);
+  var projSavesPct  = Math.min(100, projSaves  / baseline * 100);
+  var actNeedsPct   = Math.min(100, actualNeeds / baseline * 100);
+  var actWantsPct   = Math.min(100, actualWants / baseline * 100);
+  var actSavesPct   = Math.min(100, actualSaves / baseline * 100);
+
+  document.getElementById('bd-needs-proj').style.width   = projNeedsPct + '%';
+  document.getElementById('bd-needs-actual').style.width = actNeedsPct  + '%';
+  document.getElementById('bd-wants-proj').style.width   = projWantsPct + '%';
+  document.getElementById('bd-wants-actual').style.width = actWantsPct  + '%';
+  document.getElementById('bd-saves-proj').style.width   = projSavesPct + '%';
+  document.getElementById('bd-saves-actual').style.width = actSavesPct  + '%';
 
   var needsEl = document.getElementById('bd-needs-nums');
-  needsEl.textContent = fmtS(needsTotal) + ' (' + needsPct.toFixed(0) + '%)';
-  needsEl.className = 'bd-nums ' + (needsPct > 55 ? 'over' : needsPct > 50 ? 'warn' : 'ok');
+  needsEl.innerHTML = fmtS(actualNeeds) + ' <span class="bd-nums-proj">/ ' + fmtS(projNeeds) + '</span>';
+  needsEl.className = 'bd-nums ' + (actNeedsPct > 55 ? 'over' : actNeedsPct > 50 ? 'warn' : 'ok');
 
   var wantsEl = document.getElementById('bd-wants-nums');
-  wantsEl.textContent = fmtS(wantsTotal) + ' (' + wantsPct.toFixed(0) + '%)';
-  wantsEl.className = 'bd-nums ' + (wantsPct > 30 ? 'over' : 'ok');
+  wantsEl.innerHTML = fmtS(actualWants) + ' <span class="bd-nums-proj">/ ' + fmtS(projWants) + '</span>';
+  wantsEl.className = 'bd-nums ' + (actWantsPct > 30 ? 'over' : 'ok');
 
   var savesEl = document.getElementById('bd-saves-nums');
-  savesEl.textContent = fmtS(savingsTotal) + ' (' + savesPct.toFixed(0) + '%)';
-  savesEl.className = 'bd-nums ' + (savesPct >= 20 ? 'ok' : savesPct >= 10 ? 'warn' : 'over');
+  savesEl.innerHTML = fmtS(actualSaves) + ' <span class="bd-nums-proj">/ ' + fmtS(projSaves) + '</span>';
+  savesEl.className = 'bd-nums ' + (actSavesPct >= 20 ? 'ok' : actSavesPct >= 10 ? 'warn' : 'over');
 
   renderBills();
 }
