@@ -334,10 +334,6 @@ body { background: #fff !important; padding-bottom: 0; }
   <div class="card">
     <div class="card-header">
       <span class="card-title">Bills</span>
-      <div class="view-toggle">
-        <button class="view-tog active" id="vt-wk" onclick="setView('weekly')">Wk</button>
-        <button class="view-tog" id="vt-mo" onclick="setView('monthly')">Mo</button>
-      </div>
     </div>
     <div class="bills-list" id="bills-list"></div>
     <div class="progress-wrap">
@@ -362,7 +358,7 @@ var MONTHLY_INCOME = (1122.30 + 1052.59) * 4.33;
 var ALLOWANCES_MONTHLY = (300 + 300 + 50) * 4.33;
 var deposits = [];
 var depVisible = true;
-var viewMode = 'weekly';
+var viewMode = 'monthly';
 
 var bills = [
   { name: 'CSU UTILITIES',   amt: 259.00,  freq: 'M', tag: 'need', due: '8',  paid: false },
@@ -400,12 +396,8 @@ function monthlyAmt(b) {
 }
 
 function displayAmt(b) {
-  if (viewMode === 'weekly') {
-    if (b.freq === 'W') return b.amt;
-    if (b.freq === 'Q') return b.amt / 13;
-    return b.amt / 4.33;
-  }
-  return monthlyAmt(b);
+  // Always show the actual entered amount
+  return b.amt;
 }
 
 function getDeposited() {
@@ -525,13 +517,6 @@ function renderDeposits() {
   });
 }
 
-function setView(v) {
-  viewMode = v;
-  document.getElementById('vt-wk').classList.toggle('active', v === 'weekly');
-  document.getElementById('vt-mo').classList.toggle('active', v === 'monthly');
-  renderBills();
-}
-
 function togglePaid(i) { bills[i].paid = !bills[i].paid; renderBills(); recalc(); }
 
 function cycleFreq(i) {
@@ -591,11 +576,13 @@ function renderBills() {
       lbl.textContent = group.label;
       container.appendChild(lbl);
     }
+    var sectionTotal = 0;
     group.items.forEach(function(obj) {
       var b = obj.b;
       var i = obj.i;
       totalCount++;
       if (b.paid) paidCount++;
+      sectionTotal += monthlyAmt(b);
 
       var mo   = monthlyAmt(b);
       var disp = displayAmt(b);
@@ -609,13 +596,9 @@ function renderBills() {
 
       var subAmt = '';
       if (b.freq === 'W') {
-        subAmt = viewMode === 'weekly'
-          ? '<div class="bill-amt-sub">' + fmt(mo) + '/mo</div>'
-          : '<div class="bill-amt-sub">' + fmt(b.amt) + '/wk</div>';
+        subAmt = '<div class="bill-amt-sub">' + fmt(mo) + '/mo</div>';
       } else if (b.freq === 'Q') {
-        subAmt = viewMode === 'weekly'
-          ? '<div class="bill-amt-sub">' + fmt(mo) + '/mo</div>'
-          : '<div class="bill-amt-sub">' + fmt(b.amt) + '/qtr</div>';
+        subAmt = '<div class="bill-amt-sub">' + fmt(mo) + '/mo avg</div>';
       }
 
       var barW = bt.total > 0 ? Math.min(100, (mo / bt.total) * 100) : 0;
@@ -638,6 +621,14 @@ function renderBills() {
         '<div class="bill-bar"><div class="bill-bar-fill ' + barClass + '" style="width:' + barW + '%"></div></div>';
       container.appendChild(div);
     });
+
+    // Section total row
+    var secTotalDiv = document.createElement('div');
+    secTotalDiv.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:8px 0 4px;border-top:1px solid #e2e2de;margin-top:2px;';
+    secTotalDiv.innerHTML =
+      '<span style="font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a86;">' + (group.label || 'Needs') + ' Total</span>' +
+      '<span style="font-size:12px;font-weight:700;color:#c93b2e;">(' + '$' + sectionTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) + ')</span>';
+    container.appendChild(secTotalDiv);
   });
 
   var paidPct = bt.total > 0 ? (bt.paid / bt.total * 100) : 0;
