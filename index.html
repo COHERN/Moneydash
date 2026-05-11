@@ -380,6 +380,7 @@ var bills = [
   { name: 'METRONET',        amt: 72.90,   freq: 'M', tag: 'need', due: '25', paid: false },
   { name: 'T-MOBILE',        amt: 175.25,  freq: 'M', tag: 'need', due: '25', paid: false },
   { name: 'MORTGAGE',        amt: 2104.84, freq: 'M', tag: 'need', due: '31', paid: false },
+  { name: 'CODY GAS',        amt: 25.00,   freq: 'W', tag: 'need', due: '',   paid: false },
   { name: 'KATIE GAS',       amt: 100.00,  freq: 'W', tag: 'need', due: '',   paid: false },
   { name: 'HOA DUES',        amt: 82.98,   freq: 'Q', tag: 'need', due: '',   paid: false },
   { name: 'SOCO TRASH',      amt: 123.85,  freq: 'Q', tag: 'need', due: '',   paid: false },
@@ -691,9 +692,9 @@ function recalc() {
   var savings = Math.max(0, deposited - totalExpenses);
 
   document.getElementById('hero-period').textContent   = currentMonth();
-  document.getElementById('hero-dep').textContent      = fmt(deposited);
-  document.getElementById('hero-expenses').textContent = fmtPL(totalExpenses);
-  document.getElementById('hero-savings').textContent  = fmt(savings);
+  document.getElementById('hero-dep').innerHTML        = fmt(deposited) + '<div style="font-size:9px;color:#666660;margin-top:3px;">proj ' + fmt(MONTHLY_INCOME) + '</div>';
+  document.getElementById('hero-expenses').innerHTML   = fmtPL(totalExpenses) + '<div style="font-size:9px;color:#666660;margin-top:3px;">bills ' + fmtPL(bt.unpaid) + ' left</div>';
+  document.getElementById('hero-savings').innerHTML    = fmt(savings) + '<div style="font-size:9px;color:#666660;margin-top:3px;">proj ' + fmt(Math.max(0, MONTHLY_INCOME - bt.total - ALLOWANCES_MONTHLY)) + '</div>';
   document.getElementById('dep-total').textContent     = fmt(deposited);
 
   // 50/30/20 — Projected vs Actual
