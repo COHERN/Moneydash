@@ -212,10 +212,31 @@ transition: opacity 0.2s;
 }
 
 @media print {
-@page { margin: 15mm; }
-body { background: #fff !important; padding-bottom: 0; }
-.btn-hdr, .btn-add-dep, .btn-add-bill, .btn-bill-del, .paid-btn, .dep-add-row, .bills-footer, .collapse-btn, .payroll-btns { display: none !important; }
-.hero { background: #1a1a1a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+@page { margin: 20mm; size: A4; }
+
+body { background: #fff !important; padding-bottom: 0; font-family: ‘Space Mono’, monospace !important; }
+
+/* Hide everything */
+.site-header, .hero, .card, .allow-grid, .allow-footer,
+.dep-add-row, .bills-footer, .payroll-btns,
+.paid-btn, .btn-bill-del, .freq-tog, .tag-btn, .bill-pct-badge,
+.bill-bar, .progress-wrap, .bills-tally,
+.collapse-btn, .view-toggle { display: none !important; }
+
+/* Show only print layout */
+.print-only { display: block !important; }
+
+.main { padding: 0; gap: 0; max-width: 100%; }
+}
+
+/* Print layout — hidden on screen */
+.print-only { display: none; }
+.pnl {
+font-family: ‘Space Mono’, monospace;
+font-size: 11px;
+line-height: 1.6;
+color: #000;
+white-space: pre;
 }
 </style>
 
@@ -753,7 +774,97 @@ document.getElementById('dep-date').value = todayStr();
 renderDeposits();
 renderBills();
 recalc();
+
+function pad(str, width) {
+  str = String(str);
+  while (str.length < width) str = str + ' ';
+  return str;
+}
+
+function padLeft(str, width) {
+  str = String(str);
+  while (str.length < width) str = ' ' + str;
+  return str;
+}
+
+function generatePNL() {
+  var W = 46;
+  var line = '';
+  for (var i = 0; i < W; i++) line += '=';
+  var dline = '';
+  for (var i = 0; i < W; i++) dline += '-';
+
+  var deposited = getDeposited();
+  var bt = getBillTotals();
+  var totalExpenses = bt.total + ALLOWANCES_MONTHLY;
+  var savings = deposited - totalExpenses;
+  var month = currentMonth().toUpperCase();
+
+  var out = '';
+  out += line + '\n';
+  out += '  BUDGET OS — ' + month + '\n';
+  out += line + '\n\n';
+
+  // Income
+  out += 'INCOME\n';
+  deposits.forEach(function(d) {
+    out += '  ' + pad(d.label, 28) + padLeft(fmt(d.amt), 12) + '\n';
+  });
+  out += '  ' + dline.slice(0, W-2) + '\n';
+  out += '  ' + pad('TOTAL INCOME', 28) + padLeft(fmt(deposited), 12) + '\n\n';
+
+  // Needs
+  out += 'EXPENSES — NEEDS\n';
+  bills.forEach(function(b) {
+    if (b.tag === 'need') {
+      var mo = monthlyAmt(b);
+      out += '  ' + pad(b.name, 28) + padLeft(fmt(mo), 12) + '\n';
+    }
+  });
+  out += '  ' + dline.slice(0, W-2) + '\n';
+  out += '  ' + pad('NEEDS TOTAL', 28) + padLeft(fmtPL(bt.needs), 12) + '\n\n';
+
+  // Wants
+  out += 'EXPENSES — WANTS\n';
+  bills.forEach(function(b) {
+    if (b.tag === 'want') {
+      var mo = monthlyAmt(b);
+      out += '  ' + pad(b.name, 28) + padLeft(fmt(mo), 12) + '\n';
+    }
+  });
+  out += '  ' + dline.slice(0, W-2) + '\n';
+  out += '  ' + pad('WANTS TOTAL', 28) + padLeft(fmtPL(bt.wants), 12) + '\n\n';
+
+  // Allowances
+  out += 'ALLOWANCES\n';
+  out += '  ' + pad('CODY', 28) + padLeft('$1,299.00', 12) + '\n';
+  out += '  ' + pad('KATIE', 28) + padLeft('$1,299.00', 12) + '\n';
+  out += '  ' + pad('HAILEY', 28) + padLeft('$216.50', 12) + '\n';
+  out += '  ' + dline.slice(0, W-2) + '\n';
+  out += '  ' + pad('ALLOWANCES TOTAL', 28) + padLeft(fmtPL(ALLOWANCES_MONTHLY), 12) + '\n\n';
+
+  // Total expenses
+  out += '  ' + dline.slice(0, W-2) + '\n';
+  out += '  ' + pad('TOTAL EXPENSES', 28) + padLeft(fmtPL(totalExpenses), 12) + '\n\n';
+
+  // Net
+  out += line + '\n';
+  out += '  ' + pad('NET SAVINGS', 28) + padLeft(fmt(Math.max(0, savings)), 12) + '\n';
+  out += line + '\n';
+
+  return out;
+}
+
+window.onbeforeprint = function() {
+  document.getElementById('pnl-output').textContent = generatePNL();
+};
 </script>
+
+<!-- PRINT ONLY P&L -->
+
+<div class="print-only">
+  <pre class="pnl" id="pnl-output"></pre>
+</div>
 
 </body>
 </html>
