@@ -429,20 +429,20 @@ var deposits = [];
 var depVisible = true;
 
 var bills = [
-  { name: 'CSU UTILITIES',   amt: 259.00,  freq: 'M', tag: 'need', due: '8',  paid: false },
-  { name: 'QUICK QUACK',     amt: 61.99,   freq: 'M', tag: 'want', due: '12', paid: false },
-  { name: 'LIBERTY MUTUAL',  amt: 457.21,  freq: 'M', tag: 'need', due: '17', paid: false },
-  { name: 'RAV4 PAYMENT',    amt: 303.08,  freq: 'M', tag: 'need', due: '17', paid: false },
-  { name: 'EL DORADO WATER', amt: 80.90,   freq: 'M', tag: 'need', due: '20', paid: false },
-  { name: 'METRONET',        amt: 72.90,   freq: 'M', tag: 'need', due: '25', paid: false },
-  { name: 'T-MOBILE',        amt: 175.25,  freq: 'M', tag: 'need', due: '25', paid: false },
-  { name: 'MORTGAGE',        amt: 2104.84, freq: 'M', tag: 'need', due: '31', paid: false },
-  { name: 'CODY GAS',        amt: 25.00,   freq: 'W', tag: 'need', due: '',   paid: false },
-  { name: 'KATIE GAS',       amt: 100.00,  freq: 'W', tag: 'need', due: '',   paid: false },
-  { name: 'HOA DUES',        amt: 82.98,   freq: 'Q', tag: 'need', due: '',   paid: false },
-  { name: 'SOCO TRASH',      amt: 123.85,  freq: 'Q', tag: 'need', due: '',   paid: false },
-  { name: 'YOUTUBE PREMIUM', amt: 25.08,   freq: 'M', tag: 'want', due: '',   paid: false },
-  { name: 'HBO/HULU/DISNEY', amt: 34.69,   freq: 'M', tag: 'want', due: '',   paid: false }
+  { name: "CSU UTILITIES",   amt: 259.00,  freq: "M", tag: "need", due: "8",  paid: false },
+  { name: "QUICK QUACK",     amt: 61.99,   freq: "M", tag: "want", due: "12", paid: false },
+  { name: "LIBERTY MUTUAL",  amt: 457.21,  freq: "M", tag: "need", due: "17", paid: false },
+  { name: "RAV4 PAYMENT",    amt: 303.08,  freq: "M", tag: "need", due: "17", paid: false },
+  { name: "EL DORADO WATER", amt: 80.90,   freq: "M", tag: "need", due: "20", paid: false },
+  { name: "METRONET",        amt: 72.90,   freq: "M", tag: "need", due: "25", paid: false },
+  { name: "T-MOBILE",        amt: 175.25,  freq: "M", tag: "need", due: "25", paid: false },
+  { name: "MORTGAGE",        amt: 2104.84, freq: "M", tag: "need", due: "31", paid: false },
+  { name: "CODY GAS",        amt: 25.00,   freq: "W", tag: "need", due: "",   paid: false },
+  { name: "KATIE GAS",       amt: 100.00,  freq: "W", tag: "need", due: "",   paid: false },
+  { name: "HOA DUES",        amt: 82.98,   freq: "Q", tag: "need", due: "",   paid: false },
+  { name: "SOCO TRASH",      amt: 123.85,  freq: "Q", tag: "need", due: "",   paid: false },
+  { name: "YOUTUBE PREMIUM", amt: 25.08,   freq: "M", tag: "want", due: "",   paid: false },
+  { name: "HBO/HULU/DISNEY", amt: 34.69,   freq: "M", tag: "want", due: "",   paid: false }
 ];
 
 // Theme
@@ -570,11 +570,11 @@ function renderDeposits() {
 function togglePaid(i) { bills[i].paid = !bills[i].paid; renderBills(); recalc(); }
 function cycleFreq(i) {
   var f = bills[i].freq;
-  bills[i].freq = f === 'M' ? 'W' : f === 'W' ? 'Q' : 'M';
+  bills[i].freq = f === "M" ? "W" : f === "W" ? "Q" : "M";
   renderBills(); recalc();
 }
 function cycleTag(i) {
-  bills[i].tag = bills[i].tag === 'need' ? 'want' : 'need';
+  bills[i].tag = bills[i].tag === "need" ? "want" : "need";
   renderBills(); recalc();
 }
 
@@ -617,6 +617,7 @@ function renderBills() {
       var covered = running >= mo;
       if (covered) running -= mo;
       covMap[obj.i] = covered;
+      covMap[obj.i + '_running'] = Math.max(0, running);
     }
   });
 
@@ -653,11 +654,18 @@ function renderBills() {
       else if (b.freq === 'Q') subAmt = '<div class="bill-amt-sub">' + fmt(mo) + '/mo avg</div>';
       var barW = bt.total > 0 ? Math.min(100, (mo / bt.total) * 100) : 0;
 
-      // Coverage badge
+      // Coverage badge + running balance
       var covHtml = '';
       if (hasBal && !b.paid) {
         var cov = covMap[i];
-        covHtml = '<span class="bill-cov-badge ' + (cov ? 'ok' : 'no') + '">' + (cov ? '&#10003;' : '&#215;') + '</span>';
+        covHtml = '<span class="bill-cov-badge ' + (cov ? "ok" : "no") + '">' + (cov ? "&#10003;" : "&#215;") + '</span>';
+      }
+      var runHtml = '';
+      if (hasBal && !b.paid && covMap[i] !== undefined) {
+        var runAmt = covMap[i + '_running'];
+        if (runAmt !== undefined) {
+          runHtml = '<div style="font-size:9px;color:var(--text2);margin-top:2px;">bal: ' + fmt(runAmt) + '</div>';
+        }
       }
 
       var div = document.createElement('div');
@@ -671,7 +679,7 @@ function renderBills() {
             '<button class="tag-btn ' + tag + '" onclick="cycleTag(' + i + ')">' + tagLabel + '</button>' +
           '</div>' +
         '</div>' +
-        '<div class="bill-amt-col">' + covHtml + '<div class="bill-amt-main">' + fmt(b.amt) + '</div>' + subAmt + '</div>' +
+        '<div class="bill-amt-col">' + covHtml + '<div class="bill-amt-main">' + fmt(b.amt) + '</div>' + subAmt + runHtml + '</div>' +
         '<button class="btn-bill-del" onclick="removeBill(' + i + ')">&#215;</button>' +
         '<div class="bill-bar"><div class="bill-bar-fill ' + barClass + '" style="width:' + barW + '%"></div></div>';
       container.appendChild(div);
